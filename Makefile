@@ -6,13 +6,14 @@
 #    By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/03/31 17:45:18 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/03/31 21:33:52 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
-SRCS		=	fdf.c\
+SRCS		=	fdf.c		validation.c\
+				error_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 
 HEADER		=	fdf.h
@@ -55,7 +56,7 @@ ft_printf	:
 				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MD
 
 $(NAME)		:	$(OBJS) $(LIB) $(FT_PRINTF)
-				$(CC) $(CFLAGS) $(INCLUDES) $(LIB) -o $(FT_PRINTF) -o $(NAME) $(OBJS)
+				$(CC) $(CFLAGS) $(INCLUDES) $(LIB) $(FT_PRINTF) -o $(NAME) $(OBJS)
 				@echo ${GREEN} "\n\tFDF is compiled\n" ${END}
 
 clean		:	

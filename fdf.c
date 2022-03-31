@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/03/31 17:26:59 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/03/31 23:24:38 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,14 @@
 
 int	main(int argc, char **argv)
 {
-	ft_printf("[%3d]\n", 10);
-	(void) argc;
-	(void) argv;
+	t_fdf	*map;
+
+	map = NULL;
+	if (argc == 2)
+		map = validation(argv[1]);
+	if (!map)
+		return (0);
+	ft_printf("y = [%3d]\n", map->y);
+	free(map);
 	return (0);
 }
