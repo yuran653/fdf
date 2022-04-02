@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/02 07:32:54 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/02 19:46:01 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ int	main(int argc, char **argv)
 		map = validation(argv[1]);
 	if (!map)
 		return (0);
+	int y;
+	int x;
+	for (y = 0; map->z[y]; y++)
+	{
+		ft_printf("%d - ", y);
+		for (x = 0; x < map->x; x++)
+			ft_printf("%3d", map->z[y][x]);
+		ft_printf("\n");		
+	}
 	free_map(map);
 	return (0);
 }
