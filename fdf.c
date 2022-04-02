@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/03/31 23:24:38 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/02 07:32:54 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	check_leak()
+{
+	exit(0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -21,7 +26,6 @@ int	main(int argc, char **argv)
 		map = validation(argv[1]);
 	if (!map)
 		return (0);
-	ft_printf("y = [%3d]\n", map->y);
-	free(map);
+	free_map(map);
 	return (0);
 }
