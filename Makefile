@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+         #
+#    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/03/31 21:33:52 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/02 04:01:08 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
-SRCS		=	fdf.c		validation.c\
-				error_exit.c\
+SRCS		=	fdf.c			validation.c		free_func.c\
+				error_free.c	error_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 
 HEADER		=	fdf.h

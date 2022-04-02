@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:02:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/01 00:46:42 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/02 04:10:15 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	error_common(void)
 	exit(EXIT_FAILURE);
 }
 
-void	error_malloc(void)
+void	error_map(void)
 {
-	perror("\e[1;31mERROR:\e[0m malloc allocation failure");
-	exit(EXIT_FAILURE);
+	ft_putstr_fd("\e[1;31mERROR:\e[0m map is not valid\n", STDERR_FILENO);
+	exit(0);
 }
 
 void	error_file(char *file_name, int fd)
@@ -47,15 +47,22 @@ void	error_file(char *file_name, int fd)
 	}
 }
 
-void	error_malloc_free_fdf(t_fdf *map)
+void	valid_file_name(char *argv)
 {
-	free(map);
-	error_malloc();
-}
-
-void	error_close_free(t_fdf *map, char *str)
-{
-	free(map);
-	free(str);
-	error_common();
+	int		i;
+	char	*fdf;
+	
+	fdf = ".fdf";
+	i = ft_strlen(argv) - 4;
+	while (argv[i])
+	{
+		if (*fdf++ != argv[i++])
+		{
+			ft_putstr_fd("\e[1;31mERROR:\e[0m file name is not valid: ",
+				STDERR_FILENO);
+			ft_putstr_fd(argv, STDERR_FILENO);
+			ft_putstr_fd("\n", STDERR_FILENO);
+			exit(EXIT_SUCCESS);
+		}
+	}
 }
