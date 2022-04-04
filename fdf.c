@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/02 19:46:01 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:45:54 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,16 @@ int	main(int argc, char **argv)
 	int x;
 	for (y = 0; map->z[y]; y++)
 	{
-		ft_printf("%d - ", y);
+		ft_printf("%3d - ", y);
 		for (x = 0; x < map->x; x++)
 			ft_printf("%3d", map->z[y][x]);
+		ft_printf("\n");		
+	}
+	for (y = 0; map->color[y]; y++)
+	{
+		ft_printf("%3d - ", y);
+		for (x = 0; x < map->x; x++)
+			ft_printf("%7X", map->color[y][x]);
 		ft_printf("\n");		
 	}
 	free_map(map);

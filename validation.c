@@ -6,57 +6,58 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/02 19:47:41 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 00:14:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_z(t_fdf *map, char **map_split, char **str_split, int i)
+void	get_z(t_fdf *map, char **map_split, char **str_split, int y)
 {
-	int	*array;
-	int	j;
-
-	j = -1;
-	array = (int *)malloc(sizeof(int) * map->x);
-	if (!array)
-		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
-	while (++j < map->x)
-		array[j] = ft_atoi(str_split[j]);
-	map->z[i] = array;
-}
-
-void	set_check_x(t_fdf *map, char **map_split, char **str_split, int i)
-{
-	int	j;
-
-	j = 0;
-	while (str_split[j])
-		j++;
-	if (i == 0)
-		map->x = j;
-	else if (map->x != j)
+	int	err;
+	int	x;
+	
+	x = 0;
+	while (str_split[x])
+		x++;
+	if (y == 0)
+		map->x = x;
+	else if (map->x != x)
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
-	get_z(map, map_split, str_split, i);
+	map->z[y] = (int *)malloc(sizeof(int) * map->x);
+	if (!map->z[y])
+		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	map->color[y] = (int *)malloc(sizeof(int) * map->x);
+	if (!map->color[y])
+		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	x = 0;
+	while (x < map->x)
+	{
+		err = get_color(map, str_split, x++, y);
+		if (err == 1)
+			error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
+		if (err == -1)
+			error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	}
 }
 
 void	get_x(t_fdf *map, char *map_str)
 {
-	int		i;
+	int		y;
 	char	**map_split;
 	char	**str_split;
 
-	i = 0;
+	y = 0;
 	map_split = ft_split(map_str, '\n');
 	free(map_str);
 	if (!map_split)
 		error_free_map_exit(map);
-	while (map_split[i])
+	while (map_split[y])
 	{
-		str_split = ft_split(map_split[i++], ' ');
+		str_split = ft_split(map_split[y++], ' ');
 		if (!str_split)
 			error_free_array_exit(map, (void **)map_split);
-		set_check_x(map, map_split, str_split, i - 1);
+		get_z(map, map_split, str_split, y - 1);
 		free_array((void **)str_split);
 	}	
 	free_array((void **)map_split);
@@ -81,6 +82,8 @@ char	*get_y(t_fdf *map, int fd)
 		{
 			map->y++;
 			map_str = ft_strjoin_gnl(map_str, line);
+			if (!map_str)
+				error_free_str_exit(map, line);
 		}
 		free(line);
 	}
@@ -92,9 +95,7 @@ t_fdf	*validation(char *argv)
 	t_fdf	*map;
 	char	*map_str;
 	int		fd;
-	int		i;
 
-	i = 0;
 	valid_file_name(argv);
 	fd = open(argv, O_RDONLY);
 	error_file(argv, fd);
@@ -102,16 +103,13 @@ t_fdf	*validation(char *argv)
 	if (!map)
 		error_common();
 	map->z = NULL;
+	map->color = NULL;
 	map_str = get_y(map, fd);
 	if (!map_str)
 		error_free_exit(map);
 	if (close(fd) == -1)
-		error_free_exit_2(map, map_str);
-	map->z = (int **)malloc(sizeof(int *) * (map->y + 1));
-	if (!map->z)
-		error_free_array_exit(map, (void **)map_str);
-	while (i <= map->y)
-		map->z[i++] = NULL;
+		error_free_str_exit(map, map_str);
+	calloc_arrays(map, map_str);
 	get_x(map, map_str);
 	return (map);
 }
