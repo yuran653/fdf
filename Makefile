@@ -6,13 +6,14 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/05 18:59:48 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/05 21:58:58 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
 SRCS		=	fdf.c			validation.c		get_map.c\
+				draw.c\
 				free_func.c		error_free.c		error_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 
@@ -36,6 +37,8 @@ GNL			=	./get_next_line/
 
 FT_PRINTF	=	./ft_printf/libftprintf.a
 
+MLX			=	-lmlx -framework OpenGL -framework AppKit
+
 YELLOW		=	"\033[1;33m"
 GREEN		=	"\033[1;32m"
 END			=	"\033[0m"
@@ -56,7 +59,7 @@ ft_printf	:
 				$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MD
 
 $(NAME)		:	$(OBJS) $(LIB) $(FT_PRINTF)
-				$(CC) $(CFLAGS) $(INCLUDES) $(LIB) $(FT_PRINTF) -o $(NAME) $(OBJS)
+				$(CC) $(CFLAGS) $(INCLUDES) $(LIB) $(FT_PRINTF) -o $(NAME) $(OBJS) $(MLX)
 				@echo ${GREEN} "\n\tFDF is compiled\n" ${END}
 
 clean		:	

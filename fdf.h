@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 19:03:24 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/06 02:31:22 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
+# include <mlx.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -33,6 +34,10 @@ typedef struct s_fdf
 	int		y;
 	int		**z;
 	int		**color;
+	int		zoom;
+	int		shift;
+	void	*mlx_ptr;
+	void	*win_ptr;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);
@@ -58,6 +63,9 @@ void	error_free_map_exit(t_fdf *map);
 void	error_free_str_exit(t_fdf *map, char *str);
 void	error_free_array_exit(t_fdf *map, void **array);
 void	error_free_all_exit(t_fdf *map, void **arr1, void **arr2, int is_map);
+
+void	draw_map(t_fdf *map);
+void	bresenham(float x, float y, float x1, float y1, t_fdf *map);
 
 void	check_leak(void);
 
