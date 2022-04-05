@@ -6,13 +6,13 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 03:12:28 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:42:35 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	check_leak()
+void	check_leak(void)
 {
 	exit(0);
 }

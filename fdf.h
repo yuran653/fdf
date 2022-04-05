@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 02:51:25 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 18:46:25 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	get_x(t_fdf *map, char *map_str);
 void	get_z(t_fdf *map, char **map_split, char **str_split, int i);
 int		set_z_color(t_fdf *map, char **str_split, int x, int y);
 int		check_digit(char *arg);
+int		check_hex(char hex, char *base);
+int		get_color(char *hex, int i);
 int		array_len(char **array);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);
 void	free_map(t_fdf *map);
 void	error_common(void);
 void	error_map(void);
+int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
 void	error_free_exit(void *value);
 void	error_free_map_exit(t_fdf *map);
