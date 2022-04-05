@@ -69,7 +69,7 @@ int	get_color(char *hex, int i)
 	{
 		if (i >= 8)
 			return (-1);
-		hex_read = check_hex(ft_toupper(hex[i]), "0123456789ABCDEF");
+		hex_read = check_hex(ft_toupper(hex[i]), BASE16);
 		if (hex_read >= 0)
 			hex_num = hex_num * 16 + hex_read;
 		else

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 18:46:25 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 19:03:24 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <unistd.h>
 
 # ifndef BASE16
-#  define BASE16 "0123456789abcdef"
+#  define BASE16 "0123456789ABCDEF"
 # endif
 
 typedef struct s_fdf
