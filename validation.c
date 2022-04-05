@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 00:14:11 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 02:56:04 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	get_z(t_fdf *map, char **map_split, char **str_split, int y)
 {
 	int	err;
 	int	x;
-	
+
 	x = 0;
 	while (str_split[x])
 		x++;
@@ -33,7 +33,7 @@ void	get_z(t_fdf *map, char **map_split, char **str_split, int y)
 	x = 0;
 	while (x < map->x)
 	{
-		err = get_color(map, str_split, x++, y);
+		err = set_z_color(map, str_split, x++, y);
 		if (err == 1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
 		if (err == -1)
@@ -90,6 +90,20 @@ char	*get_y(t_fdf *map, int fd)
 	return (NULL);
 }
 
+int	**calloc_array(t_fdf *map, char *str)
+{
+	int	y;
+	int	**array;
+
+	y = 0;
+	array = (int **)malloc(sizeof(int *) * (map->y + 1));
+	if (!array)
+		error_free_str_exit(map, str);
+	while (y <= map->y)
+		array[y++] = NULL;
+	return (array);
+}
+
 t_fdf	*validation(char *argv)
 {
 	t_fdf	*map;
@@ -109,7 +123,8 @@ t_fdf	*validation(char *argv)
 		error_free_exit(map);
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
-	calloc_arrays(map, map_str);
+	map->z = calloc_array(map, map_str);
+	map->color = calloc_array(map, map_str);
 	get_x(map, map_str);
 	return (map);
 }

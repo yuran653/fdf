@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 00:12:02 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/05 02:51:25 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <string.h>
 # include <unistd.h>
 
+# ifndef BASE16
+#  define BASE16 "0123456789abcdef"
+# endif
+
 typedef struct s_fdf
 {
 	int		x;
@@ -33,11 +37,11 @@ typedef struct s_fdf
 
 t_fdf	*validation(char *argv);
 void	valid_file_name(char *argv);
-void	calloc_arrays(t_fdf *map, char *str);
+int		**calloc_array(t_fdf *map, char *str);
 char	*get_y(t_fdf *map, int fd);
 void	get_x(t_fdf *map, char *map_str);
 void	get_z(t_fdf *map, char **map_split, char **str_split, int i);
-int		get_color(t_fdf *map, char **str_split, int x, int y);
+int		set_z_color(t_fdf *map, char **str_split, int x, int y);
 int		check_digit(char *arg);
 int		array_len(char **array);
 void	free_array(void **array);

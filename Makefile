@@ -6,13 +6,13 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/04 19:45:31 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/05 02:55:05 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
-SRCS		=	fdf.c			validation.c		get_color.c		init_func.c\
+SRCS		=	fdf.c			validation.c		get_color.c\
 				free_func.c		error_free.c		error_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 
