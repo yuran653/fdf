@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/06 02:41:47 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/07 20:56:00 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ void	isometric(float *x, float *y, int z, float angle)
 	*y = (*x + *y) * sin(angle) - z;
 }
 
+#define ZOOM 5
+#define ANGLE 0.8
+#define SHIFT 400
+
 void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 {
 	float	x_step;
@@ -51,10 +55,10 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 	// 	color = 0X00FF00;
 	color = map->color[(int)y][(int)x];
 
-	angle = 0.8;
+	angle = ANGLE;
 	
 	//-----------ZOOM------------
-	map->zoom = 10;
+	map->zoom = ZOOM;
 	x *= map->zoom;
 	y *= map->zoom;
 	x1 *= map->zoom;
@@ -67,11 +71,11 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 	isometric(&x1, &y1, z1, angle);
 
 	//-----------SHIFT-----------
-	map->shift = 400;
+	map->shift = SHIFT;
 	x += map->shift;
-	y += map->shift;
+	y += map->shift * 1.5;
 	x1 += map->shift;
-	y1 += map->shift;
+	y1 += map->shift * 1.5;
 
 	x_step = x1 - x;
 	y_step = y1 - y;

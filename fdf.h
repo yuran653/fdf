@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/06 02:31:22 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/07 21:42:36 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 #  define BASE16 "0123456789ABCDEF"
 # endif
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_data;
+
 typedef struct s_fdf
 {
 	int		x;
@@ -38,6 +46,7 @@ typedef struct s_fdf
 	int		shift;
 	void	*mlx_ptr;
 	void	*win_ptr;
+	t_data	*data;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);

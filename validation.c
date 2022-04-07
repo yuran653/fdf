@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 02:56:04 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/07 22:07:29 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ t_fdf	*validation(char *argv)
 		error_common();
 	map->z = NULL;
 	map->color = NULL;
+	map->data = NULL;
 	map_str = get_y(map, fd);
 	if (!map_str)
 		error_free_exit(map);
