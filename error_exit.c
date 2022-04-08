@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 21:02:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/05 18:40:30 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/09 01:38:00 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error_common(void)
 void	error_map(void)
 {
 	ft_putstr_fd("\e[1;31mERROR:\e[0m map is not valid\n", STDERR_FILENO);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 int	error_map_return(void **array, int is_map)

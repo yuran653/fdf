@@ -6,13 +6,11 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/07 20:56:00 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/08 03:54:21 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-#include <stdio.h>
 
 double	abs_max(double a, double b)
 {
@@ -32,9 +30,9 @@ void	isometric(float *x, float *y, int z, float angle)
 	*y = (*x + *y) * sin(angle) - z;
 }
 
-#define ZOOM 5
+#define ZOOM 20
 #define ANGLE 0.8
-#define SHIFT 400
+#define SHIFT 330
 
 void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 {
@@ -72,10 +70,10 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 
 	//-----------SHIFT-----------
 	map->shift = SHIFT;
-	x += map->shift;
-	y += map->shift * 1.5;
-	x1 += map->shift;
-	y1 += map->shift * 1.5;
+	x += map->shift * 3;
+	y += map->shift;
+	x1 += map->shift * 3;
+	y1 += map->shift;
 
 	x_step = x1 - x;
 	y_step = y1 - y;
@@ -84,10 +82,11 @@ void	bresenham(float x, float y, float x1, float y1, t_fdf *map)
 	y_step /= max;
 	while ((int)(x - x1) || (int)(y - y1))
 	{
-		mlx_pixel_put(map->mlx_ptr, map->win_ptr, x, y, color);
+		my_mlx_pixel_put(map->data, x, y, color);
 		x += x_step;
 		y += y_step;
 	}
+	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data->img, 0, 0);
 }
 
 void	draw_map(t_fdf *map)
