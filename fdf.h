@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/09 02:40:43 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/09 07:00:03 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,15 @@
 
 typedef struct s_bresenham
 {
-	float	x_step;
-	float	y_step;
-	int		max;
+	int		z;
+	int		z1;
+	int		color;
 	float	x;
 	float	x1;
 	float	y;
 	float	y1;
-	int		z;
-	int		z1;
-	int		color;
+	float	x_step;
+	float	y_step;
 }	t_bresenham;
 
 typedef struct	s_data {
@@ -48,6 +47,7 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		count;
 }	t_data;
 
 typedef struct s_fdf
@@ -57,7 +57,8 @@ typedef struct s_fdf
 	int		**z;
 	int		**color;
 	int		zoom;
-	int		shift;
+	int		shift_x;
+	int		shift_y;
 	float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/09 01:57:08 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/09 06:48:34 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,3 @@ int	main(int argc, char **argv)
 	// 		ft_printf("%7X", map->color[y][x]);
 	// 	ft_printf("\n");		
 	// }
-	
-	// my_mlx_pixel_put(map->data, 100, 100, 0xFFFFFF);
-	// mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data->img, 100, 100);
-	
