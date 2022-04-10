@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 20:02:29 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 22:43:19 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,30 @@ int	main(int argc, char **argv)
 		return (0);
 	map->data = (t_data *)malloc(sizeof(t_data));
 	if (!map->data)
-		error_free_map_exit(map);			
+		error_free_map_exit(map);
+
+	t_point *fix;
+	
+	fix = map->head;
+	while (map->head)
+	{
+		ft_printf("%4d %4d ->", map->head->z, map->head->zy);
+		if (map->head->x == map->width - 1)
+			ft_printf("\n");
+		map->head = map->head->next;
+	}
+	map->head = fix;
+	ft_printf("\n");
+	fix = map->head;
+	while (map->head)
+	{
+		ft_printf("%7X", map->head->color);
+		if (map->head->x == map->width - 1)
+			ft_printf("\n");
+		map->head = map->head->next;
+	}
+	map->head = fix;
+
 	// map->mlx_ptr = mlx_init();
 	// map->win_ptr = mlx_new_window(map->mlx_ptr, 1920, 1080, "FDF");
 	// map->data->img = mlx_new_image(map->mlx_ptr, 1920, 1080);

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 20:19:39 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 22:05:36 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@
 // 	bresenham(*pixel, map);	
 // }
 
-void	init_pixel(t_fdf *map, t_pixel *pixel)
-{}
+// void	init_pixel(t_fdf *map, t_pixel *pixel)
+// {}
 
 void	draw_map(t_fdf *map)
 {
 	t_point	*fix;
-	t_pixel	pixel;
+	// t_pixel	pixel;
 	
 	fix = map->head;	
 	while (map->head)

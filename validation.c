@@ -6,11 +6,30 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 19:29:39 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 22:45:04 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	set_zx_zy(t_fdf *map)
+{
+	t_point *fix;
+	t_point	*zy;
+
+	fix = map->head;
+	zy = map->head;
+	while (!zy->y)
+		zy = zy->next;
+	while(map->head)
+	{
+		if (map->head->next)
+			if (map->head->y == map->head->next->y)
+				map->head->zy = map->head->next->z;
+		map->head = map->head->next;
+	}
+	map->head = fix;
+}
 
 void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 {
@@ -105,5 +124,6 @@ t_fdf	*validation(char *argv)
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
 	get_width(map, map_str);
+	set_zx_zy(map);
 	return (map);
 }

@@ -29,10 +29,10 @@ t_point	*init_point(int x, int y, int z, int color)
 	if (!point)
 		return (NULL);
 	point->x = x;
-	// point->x1 = x;
 	point->y = y;
-	// point->y1 = y;
 	point->z = z;
+	point->zx = 0;
+	point->zy = 0;
 	point->color = color;
 	point->next = NULL;
 	return (point);
