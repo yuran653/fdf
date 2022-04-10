@@ -6,17 +6,17 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/10 02:32:38 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/10 06:56:27 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
 SRCS		=	fdf.c			validation.c		get_map.c\
-				key_hook.c		draw_map.c			bresenham.c\
 				free_func.c\
 				error_free.c	error_exit.c		win_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
+#				key_hook.c		draw_map.c			bresenham.c\
 
 HEADER		=	fdf.h
 

@@ -6,34 +6,34 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/07 22:07:29 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 06:21:41 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_z(t_fdf *map, char **map_split, char **str_split, int y)
+void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 {
 	int	err;
-	int	x;
+	int	width;
 
-	x = 0;
-	while (str_split[x])
-		x++;
-	if (y == 0)
-		map->x = x;
-	else if (map->x != x)
+	width = 0;
+	while (str_split[width])
+		width++;
+	if (height == 0)
+		map->width = width;
+	else if (map->width != width)
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
-	map->z[y] = (int *)malloc(sizeof(int) * map->x);
-	if (!map->z[y])
-		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
-	map->color[y] = (int *)malloc(sizeof(int) * map->x);
-	if (!map->color[y])
-		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
-	x = 0;
-	while (x < map->x)
+	// map->z[y] = (int *)malloc(sizeof(int) * map->x);
+	// if (!map->z[y])
+	// 	error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	// map->color[y] = (int *)malloc(sizeof(int) * map->x);
+	// if (!map->color[y])
+	// 	error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	width = 0;
+	while (width < map->width)
 	{
-		err = set_z_color(map, str_split, x++, y);
+		err = fill_values(map, str_split, width++, height);
 		if (err == 1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
 		if (err == -1)
@@ -41,34 +41,34 @@ void	get_z(t_fdf *map, char **map_split, char **str_split, int y)
 	}
 }
 
-void	get_x(t_fdf *map, char *map_str)
+void	get_width(t_fdf *map, char *map_str)
 {
-	int		y;
+	int		height;
 	char	**map_split;
 	char	**str_split;
 
-	y = 0;
+	height = 0;
 	map_split = ft_split(map_str, '\n');
 	free(map_str);
 	if (!map_split)
 		error_free_map_exit(map);
-	while (map_split[y])
+	while (map_split[height])
 	{
-		str_split = ft_split(map_split[y++], ' ');
+		str_split = ft_split(map_split[height++], ' ');
 		if (!str_split)
 			error_free_array_exit(map, (void **)map_split);
-		get_z(map, map_split, str_split, y - 1);
+		get_values(map, map_split, str_split, height - 1);
 		free_array((void **)str_split);
 	}	
 	free_array((void **)map_split);
 }
 
-char	*get_y(t_fdf *map, int fd)
+char	*get_height(t_fdf *map, int fd)
 {
 	char	*map_str;
 	char	*line;
 
-	map->y = 0;
+	map->height = 0;
 	map_str = (char *)malloc(sizeof(char));
 	if (!map_str)
 		error_free_exit(map);
@@ -80,7 +80,7 @@ char	*get_y(t_fdf *map, int fd)
 			return (map_str);
 		if (line[0] != '\n')
 		{
-			map->y++;
+			map->height++;
 			map_str = ft_strjoin_gnl(map_str, line);
 			if (!map_str)
 				error_free_str_exit(map, line);
@@ -90,19 +90,19 @@ char	*get_y(t_fdf *map, int fd)
 	return (NULL);
 }
 
-int	**calloc_array(t_fdf *map, char *str)
-{
-	int	y;
-	int	**array;
+// int	**calloc_array(t_fdf *map, char *str)
+// {
+// 	int	y;
+// 	int	**array;
 
-	y = 0;
-	array = (int **)malloc(sizeof(int *) * (map->y + 1));
-	if (!array)
-		error_free_str_exit(map, str);
-	while (y <= map->y)
-		array[y++] = NULL;
-	return (array);
-}
+// 	y = 0;
+// 	array = (int **)malloc(sizeof(int *) * (map->y + 1));
+// 	if (!array)
+// 		error_free_str_exit(map, str);
+// 	while (y <= map->y)
+// 		array[y++] = NULL;
+// 	return (array);
+// }
 
 t_fdf	*validation(char *argv)
 {
@@ -116,16 +116,18 @@ t_fdf	*validation(char *argv)
 	map = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!map)
 		error_common();
-	map->z = NULL;
-	map->color = NULL;
+	// map->z = NULL;
+	// map->color = NULL;
+	map->head = NULL;
+	map->end = NULL;
 	map->data = NULL;
-	map_str = get_y(map, fd);
+	map_str = get_height(map, fd);
 	if (!map_str)
 		error_free_exit(map);
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
-	map->z = calloc_array(map, map_str);
-	map->color = calloc_array(map, map_str);
-	get_x(map, map_str);
+	// map->z = calloc_array(map, map_str);
+	// map->color = calloc_array(map, map_str);
+	get_width(map, map_str);
 	return (map);
 }

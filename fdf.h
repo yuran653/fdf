@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 04:37:53 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 07:22:46 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,25 @@ typedef struct s_steps
 	int		max;
 }	t_steps;
 
-typedef struct s_pixel
+typedef struct pixel
 {
-	float	x;
-	float	x1;
-	float	y;
-	float	y1;
-	int		z;
-	int		z1;
-	int		color;
+	float			x;
+	float			x1;
+	float			y;
+	float			y1;
+	int				z;
+	int				z1;
+	int				color;
 }	t_pixel;
+
+typedef struct s_point
+{
+	int				x;
+	int				y;
+	int				z;
+	int				color;
+	struct s_point	*next;
+}	t_point;
 
 typedef struct	s_data {
 	void	*img;
@@ -57,10 +66,10 @@ typedef struct	s_data {
 
 typedef struct s_fdf
 {
-	int		x;
-	int		y;
-	int		**z;
-	int		**color;
+	t_point	*head;
+	t_point	*end;
+	int		width;
+	int		height;
 	int		zoom;
 	int		shift_x;
 	int		shift_y;
@@ -100,6 +109,8 @@ void	draw_map(t_fdf *map);
 float	abs_max(float a, float b);
 void	bresenham(t_pixel pixel, t_fdf *map);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+int		fill_values(t_fdf *map, char **str_split, int x, int y);
 
 void	check_leak(void);
 

@@ -81,24 +81,68 @@ int	get_color(char *hex, int i)
 	return (hex_num);
 }
 
-int	set_z_color(t_fdf *map, char **str_split, int x, int y)
+void	append_point(t_fdf *map, t_point *point)
+{
+	if (!map->end)
+	{
+		map->head = point;
+		map->end = point;
+		ft_printf("HEAD POINT APPENDED: x = %d y = %d z = %d color = %X\n\n",
+			map->end->x, map->end->y,map->end->z, map->end->color);
+	}
+	else
+	{
+		ft_printf("before map->end->next value = %p\n", map->end->next);
+		map->end->next = point;
+		ft_printf(" after map->end->next value = %p\n", map->end->next);
+		ft_printf("     POINT APPENDED: x = %d y = %d z = %d color = %X\n\n",
+			map->end->x, map->end->y,map->end->z, map->end->color);
+	}
+}
+
+t_point	*init_pixel(int x, int y, int z, int color)
+{
+	t_point *point;
+
+	point = (t_point *) malloc(sizeof(t_point));
+	if (!point)
+		return (NULL);
+	point->x = x;
+	point->y = y;
+	point->z = z;
+	point->color = color;
+	point->next = NULL;
+	return (point);
+}
+
+int	fill_values(t_fdf *map, char **str_split, int x, int y)
 {
 	char	**num_color;
+	int		color;
+	t_point	*point;
 
 	num_color = ft_split(str_split[x], ',');
 	if (!num_color)
 		return(error_map_return((void **)num_color, -1));
 	if (array_len(num_color) > 2 || check_digit(num_color[0]))
 		return(error_map_return((void **)num_color, 1));
-	map->z[y][x] = ft_atoi(num_color[0]);
-	if (!num_color[1])
-		map->color[y][x] = 0XFFFFFF;
-	else
+	if (num_color[1])
 	{
-		map->color[y][x] = get_color(num_color[1], 0);
-		if (map->color[y][x] == -1)
+		color = get_color(num_color[1], 0);
+		if (color == -1)
 			return(error_map_return((void **)num_color, 1));
 	}
+	else
+		color = 0XFFFFFF;
+	int z = ft_atoi(num_color[0]);
+	ft_printf("POINT TO INITIALIZE: x = %d y = %d z = %d color = %X\n", x, y, z, color);
+	// point = init_pixel(x, y, ft_atoi(num_color[0]), color);
+	point = init_pixel(x, y, z, color);
+	if (!point)
+		return(error_map_return((void **)num_color, -1));
+	ft_printf("  POINT TO APPENDED: x = %d y = %d z = %d color = %X\n",
+		point->x, point->y, point->z, point->color);
+	append_point(map, point);
 	free_array((void **)num_color);
 	return (0);
 }
