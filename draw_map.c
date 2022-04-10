@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 02:39:39 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 04:40:08 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	ft_putchar_fd('+', 1);
 }
 
+void	set_value_draw_line(t_pixel *pixel, t_fdf *map, float *value, float *value1)
+{
+	*value1 = *value + 1;
+	pixel->z = map->z[(int)pixel->y][(int)pixel->x];
+	pixel->z1 = map->z[(int)pixel->y1][(int)pixel->x1];
+	bresenham(*pixel, map);	
+}
+
 void	draw_map(t_fdf *map)
 {
 	t_pixel	pixel;
@@ -52,15 +60,9 @@ void	draw_map(t_fdf *map)
 			pixel.x1 = pixel.x;
 			pixel.y1 = pixel.y;
 			if (pixel.x < map->x - 1)
-			{
-				pixel.x1 = pixel.x + 1;
-				bresenham(pixel, map);
-			}
+				set_value_draw_line(&pixel, map, &pixel.x, &pixel.x1);
 			if (pixel.y < map->y - 1)
-			{
-				pixel.y1 = pixel.y + 1;
-				bresenham(pixel, map);
-			}
+				set_value_draw_line(&pixel, map, &pixel.y, &pixel.y1);
 		}
 	}
 	ft_putchar_fd('\n', 1);

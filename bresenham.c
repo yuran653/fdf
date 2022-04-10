@@ -6,13 +6,13 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:31:16 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 03:49:36 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 04:38:21 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-#define ZOOM 1
+#define ZOOM 20
 #define ANGLE 0.8
 #define SHIFT_X 1000
 #define SHIFT_Y 200
@@ -63,8 +63,8 @@ void	bresenham(t_pixel pixel, t_fdf *map)
 {
 	t_steps	steps;
 
-	pixel.z = map->z[(int)pixel.y][(int)pixel.x];
-	pixel.z1 = map->z[(int)pixel.y1][(int)pixel.x1];
+	// pixel.z = map->z[(int)pixel.y][(int)pixel.x];
+	// pixel.z1 = map->z[(int)pixel.y1][(int)pixel.x1];
 	set_color(&pixel, map);
 	set_zoom(&pixel, map);
 	set_isometric(&pixel, map);
