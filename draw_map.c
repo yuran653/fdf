@@ -6,68 +6,84 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 04:40:08 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 20:19:39 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-float	abs_max(float a, float b)
-{
-	if (a < 0)
-		a *= -1;
-	if (b < 0)
-		b *= -1;
-	if (a > b)
-		return (a);
-	return (b);
-}
+// float	abs_max(float a, float b)
+// {
+// 	if (a < 0)
+// 		a *= -1;
+// 	if (b < 0)
+// 		b *= -1;
+// 	if (a > b)
+// 		return (a);
+// 	return (b);
+// }
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+// {
+// 	char	*dst;
 
-	if (x >= 1920 || y >= 1080)
-	{
-		ft_putchar_fd('-', 1);
-		data->non_print++;
-		return ;
-	}
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-	ft_putchar_fd('+', 1);
-}
+// 	if (x >= 1920 || y >= 1080)
+// 	{
+// 		ft_putchar_fd('-', 1);
+// 		data->non_print++;
+// 		return ;
+// 	}
+// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+// 	*(unsigned int *)dst = color;
+// 	ft_putchar_fd('+', 1);
+// }
 
-void	set_value_draw_line(t_pixel *pixel, t_fdf *map, float *value, float *value1)
-{
-	*value1 = *value + 1;
-	pixel->z = map->z[(int)pixel->y][(int)pixel->x];
-	pixel->z1 = map->z[(int)pixel->y1][(int)pixel->x1];
-	bresenham(*pixel, map);	
-}
+// void	set_value_draw_line(t_pixel *pixel, t_fdf *map, float *value, float *value1)
+// {
+// 	*value1 = *value + 1;
+// 	pixel->z = map->z[(int)pixel->y][(int)pixel->x];
+// 	pixel->z1 = map->z[(int)pixel->y1][(int)pixel->x1];
+// 	bresenham(*pixel, map);	
+// }
+
+void	init_pixel(t_fdf *map, t_pixel *pixel)
+{}
 
 void	draw_map(t_fdf *map)
 {
+	t_point	*fix;
 	t_pixel	pixel;
-
-	map->data->non_print = 0;
-	pixel.y = -1;
-	while (++pixel.y < map->y)
+	
+	fix = map->head;	
+	while (map->head)
 	{
-		pixel.x = -1;
-		while (++pixel.x < map->x)
-		{
-			pixel.x1 = pixel.x;
-			pixel.y1 = pixel.y;
-			if (pixel.x < map->x - 1)
-				set_value_draw_line(&pixel, map, &pixel.x, &pixel.x1);
-			if (pixel.y < map->y - 1)
-				set_value_draw_line(&pixel, map, &pixel.y, &pixel.y1);
-		}
+		map->head = map->head->next;
 	}
-	ft_putchar_fd('\n', 1);
-	printf("NON PRINT PIXELS AMOUNT [%d]\n", map->data->non_print);
+	map->head = fix;
 }
+
+// void	draw_map(t_fdf *map)
+// {
+// 	t_pixel	pixel;
+
+// 	map->data->non_print = 0;
+// 	pixel.y = -1;
+// 	while (++pixel.y < map->y)
+// 	{
+// 		pixel.x = -1;
+// 		while (++pixel.x < map->x)
+// 		{
+// 			pixel.x1 = pixel.x;
+// 			pixel.y1 = pixel.y;
+// 			if (pixel.x < map->x - 1)
+// 				set_value_draw_line(&pixel, map, &pixel.x, &pixel.x1);
+// 			if (pixel.y < map->y - 1)
+// 				set_value_draw_line(&pixel, map, &pixel.y, &pixel.y1);
+// 		}
+// 	}
+// 	ft_putchar_fd('\n', 1);
+// 	printf("NON PRINT PIXELS AMOUNT [%d]\n", map->data->non_print);
+// }
 
 // #define ZOOM 20
 // #define ANGLE 0.8

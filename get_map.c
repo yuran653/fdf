@@ -12,46 +12,30 @@
 
 #include "fdf.h"
 
-int	array_len(char **array)
+void	append_point(t_fdf *map, t_point *point)
 {
-	int	len;
-
-	len = 0;
-	while (array[len])
-		len++;
-	return (len);
+	if (!map->end)
+		map->head = point;
+	else
+		map->end->next = point;
+	map->end = point;
 }
 
-int	check_digit(char *arg)
+t_point	*init_point(int x, int y, int z, int color)
 {
-	int	i;
+	t_point *point;
 
-	i = -1;
-	while (arg[++i])
-	{
-		if (!ft_isdigit(arg[i]))
-		{
-			if ((arg[i] != '-' && arg[i] != '+') || i != 0)
-				return (1);
-			if ((arg[0] == '-' || arg[0] == '+') && ft_strlen(arg) == 1)
-				return (1);
-		}
-	}
-	return (0);
-}
-
-int	check_hex(char hex, char *base)
-{
-	int	i;
-
-	i = 0;
-	while (base[i])
-	{
-		if (hex == base[i])
-			return (i);
-		i++;
-	}
-	return (-1);
+	point = (t_point *) malloc(sizeof(t_point));
+	if (!point)
+		return (NULL);
+	point->x = x;
+	// point->x1 = x;
+	point->y = y;
+	// point->y1 = y;
+	point->z = z;
+	point->color = color;
+	point->next = NULL;
+	return (point);
 }
 
 int	get_color(char *hex, int i)
@@ -81,40 +65,6 @@ int	get_color(char *hex, int i)
 	return (hex_num);
 }
 
-void	append_point(t_fdf *map, t_point *point)
-{
-	if (!map->end)
-	{
-		map->head = point;
-		map->end = point;
-		ft_printf("HEAD POINT APPENDED: x = %d y = %d z = %d color = %X\n\n",
-			map->end->x, map->end->y,map->end->z, map->end->color);
-	}
-	else
-	{
-		ft_printf("before map->end->next value = %p\n", map->end->next);
-		map->end->next = point;
-		ft_printf(" after map->end->next value = %p\n", map->end->next);
-		ft_printf("     POINT APPENDED: x = %d y = %d z = %d color = %X\n\n",
-			map->end->x, map->end->y,map->end->z, map->end->color);
-	}
-}
-
-t_point	*init_pixel(int x, int y, int z, int color)
-{
-	t_point *point;
-
-	point = (t_point *) malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	point->color = color;
-	point->next = NULL;
-	return (point);
-}
-
 int	fill_values(t_fdf *map, char **str_split, int x, int y)
 {
 	char	**num_color;
@@ -134,14 +84,9 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	}
 	else
 		color = 0XFFFFFF;
-	int z = ft_atoi(num_color[0]);
-	ft_printf("POINT TO INITIALIZE: x = %d y = %d z = %d color = %X\n", x, y, z, color);
-	// point = init_pixel(x, y, ft_atoi(num_color[0]), color);
-	point = init_pixel(x, y, z, color);
+	point = init_point(x, y, ft_atoi(num_color[0]), color);
 	if (!point)
 		return(error_map_return((void **)num_color, -1));
-	ft_printf("  POINT TO APPENDED: x = %d y = %d z = %d color = %X\n",
-		point->x, point->y, point->z, point->color);
 	append_point(map, point);
 	free_array((void **)num_color);
 	return (0);

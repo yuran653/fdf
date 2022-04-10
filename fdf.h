@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 07:22:46 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 21:04:31 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ typedef struct s_point
 	int				x;
 	int				y;
 	int				z;
+	int				zx;
+	int				zy;
 	int				color;
 	struct s_point	*next;
 }	t_point;
@@ -77,40 +79,40 @@ typedef struct s_fdf
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
+	// int		i;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);
 void	valid_file_name(char *argv);
-int		**calloc_array(t_fdf *map, char *str);
-char	*get_y(t_fdf *map, int fd);
-void	get_x(t_fdf *map, char *map_str);
-void	get_z(t_fdf *map, char **map_split, char **str_split, int i);
-int		set_z_color(t_fdf *map, char **str_split, int x, int y);
-int		check_digit(char *arg);
-int		check_hex(char hex, char *base);
+char	*get_height(t_fdf *map, int fd);
+void	get_width(t_fdf *map, char *map_str);
+void	get_values(t_fdf *map, char **map_split, char **str_split, int height);
+int		fill_values(t_fdf *map, char **str_split, int x, int y);
 int		get_color(char *hex, int i);
 int		array_len(char **array);
+int		check_digit(char *arg);
+int		check_hex(char hex, char *base);
+t_point	*init_point(int x, int y, int z, int color);
+void	append_point(t_fdf *map, t_point *point);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);
 void	free_map(t_fdf *map);
-void	error_common(void);
-void	error_map(void);
-int		error_map_return(void **array, int is_map);
-void	error_file(char *file_name, int fd);
 void	error_free_exit(void *value);
 void	error_free_map_exit(t_fdf *map);
 void	error_free_str_exit(t_fdf *map, char *str);
 void	error_free_array_exit(t_fdf *map, void **array);
 void	error_free_all_exit(t_fdf *map, void **arr1, void **arr2, int is_map);
-void	error_free_map_win_exit(t_fdf *map, int err);
+void	error_common(void);
+void	error_map(void);
+int		error_map_return(void **array, int is_map);
+void	error_file(char *file_name, int fd);
 
 int		key_hook(int keycode, t_fdf *map);
 void	draw_map(t_fdf *map);
 float	abs_max(float a, float b);
 void	bresenham(t_pixel pixel, t_fdf *map);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-
-int		fill_values(t_fdf *map, char **str_split, int x, int y);
+void	error_free_map_win_exit(t_fdf *map, int err);
 
 void	check_leak(void);
 
