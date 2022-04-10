@@ -1,6 +1,10 @@
 {
 	"files.associations": {
 		"stdio.h": "c",
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"algorithm": "c",
+		"chrono": "c",
+		"limits": "c",
+		"ratio": "c"
 	}
 }

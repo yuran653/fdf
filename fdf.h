@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/09 07:00:03 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/10 02:39:17 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,23 @@
 #  define BASE16 "0123456789ABCDEF"
 # endif
 
-typedef struct s_bresenham
+typedef struct s_steps
 {
-	int		z;
-	int		z1;
-	int		color;
+	float	x_step;
+	float	y_step;
+	int		max;
+}	t_steps;
+
+typedef struct s_pixel
+{
 	float	x;
 	float	x1;
 	float	y;
 	float	y1;
-	float	x_step;
-	float	y_step;
-}	t_bresenham;
+	int		z;
+	int		z1;
+	int		color;
+}	t_pixel;
 
 typedef struct	s_data {
 	void	*img;
@@ -47,7 +52,7 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		count;
+	int		non_print;
 }	t_data;
 
 typedef struct s_fdf
@@ -91,9 +96,10 @@ void	error_free_all_exit(t_fdf *map, void **arr1, void **arr2, int is_map);
 void	error_free_map_win_exit(t_fdf *map, int err);
 
 int		key_hook(int keycode, t_fdf *map);
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	draw_map(t_fdf *map);
-// void	bresenham(float x, float y, float x1, float y1, t_fdf *map);
+float	abs_max(float a, float b);
+void	bresenham(t_pixel pixel, t_fdf *map);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 void	check_leak(void);
 
