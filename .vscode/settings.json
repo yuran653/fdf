@@ -5,6 +5,20 @@
 		"algorithm": "c",
 		"chrono": "c",
 		"limits": "c",
-		"ratio": "c"
+		"ratio": "c",
+		"__config": "c",
+		"__hash_table": "c",
+		"__locale": "c",
+		"array": "c",
+		"functional": "c",
+		"ios": "c",
+		"iterator": "c",
+		"locale": "c",
+		"ostream": "c",
+		"sstream": "c",
+		"string": "c",
+		"string_view": "c",
+		"type_traits": "c",
+		"vector": "c"
 	}
 }

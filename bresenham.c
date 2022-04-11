@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:31:16 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 04:38:21 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:22:29 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	bresenham(t_pixel pixel, t_fdf *map)
 	steps.y_step /= steps.max;
 	while ((int)(pixel.x - pixel.x1) || (int)(pixel.y - pixel.y1))
 	{
+		// ft_printf("LOOP\n");
 		// mlx_pixel_put(map->mlx_ptr, map->win_ptr, x, y, color);
 		my_mlx_pixel_put(map->data, pixel.x, pixel.y, pixel.color);
 		pixel.x += steps.x_step;

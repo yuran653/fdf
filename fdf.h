@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 21:04:31 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:24:00 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct	s_data {
 	int		line_length;
 	int		endian;
 	int		non_print;
+	int		print;
 }	t_data;
 
 typedef struct s_fdf
@@ -79,7 +80,6 @@ typedef struct s_fdf
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
-	// int		i;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);

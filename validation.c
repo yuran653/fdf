@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/10 22:45:04 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:26:47 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 
 void	set_zx_zy(t_fdf *map)
 {
-	t_point *fix;
+	t_point	*fix;
 	t_point	*zy;
 
 	fix = map->head;
 	zy = map->head;
 	while (!zy->y)
-		zy = zy->next;
-	while(map->head)
+		zy= zy->next;
+	while (map->head)
 	{
+		if (zy)
+		{
+			if (zy->y < map->height)
+			{
+				map->head->zy = zy->z;
+				zy = zy->next;
+			}
+		}
 		if (map->head->next)
 			if (map->head->y == map->head->next->y)
-				map->head->zy = map->head->next->z;
+				map->head->zx = map->head->next->z;
 		map->head = map->head->next;
 	}
 	map->head = fix;
