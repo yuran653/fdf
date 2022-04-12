@@ -31,9 +31,14 @@ t_point	*init_point(int x, int y, int z, int color)
 	point->x = x;
 	point->y = y;
 	point->z = z;
-	point->zx = 0;
-	point->zy = 0;
+	// point->zx = 0;
+	// point->zy = 0;
+	// point->x_step = 0;
+	// point->y_step = 0;
+	// point->max = 0;
 	point->color = color;
+	point->x1 = NULL;
+	point->y1 = NULL;
 	point->next = NULL;
 	return (point);
 }

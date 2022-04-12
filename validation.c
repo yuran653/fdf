@@ -6,34 +6,39 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/11 21:26:47 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/12 03:27:24 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	set_zx_zy(t_fdf *map)
+void	set_x1_y1(t_fdf *map)
 {
 	t_point	*fix;
-	t_point	*zy;
+	t_point	*y1;
 
+	y1 = map->head;
+	while (!y1->y)
+		y1= y1->next;
 	fix = map->head;
-	zy = map->head;
-	while (!zy->y)
-		zy= zy->next;
 	while (map->head)
 	{
-		if (zy)
+		if (y1 && map->head->y < map->height - 1)
 		{
-			if (zy->y < map->height)
-			{
-				map->head->zy = zy->z;
-				zy = zy->next;
-			}
+			map->head->y1 = y1;
+			y1 = y1->next;
 		}
+		// if (y1)
+		// {
+		// 	if (map->head->y < map->height - 1)
+		// 	{
+		// 		map->head->y1 = y1;
+		// 		y1 = y1->next;
+		// 	}
+		// }
 		if (map->head->next)
 			if (map->head->y == map->head->next->y)
-				map->head->zx = map->head->next->z;
+				map->head->x1 = map->head->next;
 		map->head = map->head->next;
 	}
 	map->head = fix;
@@ -132,6 +137,6 @@ t_fdf	*validation(char *argv)
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
 	get_width(map, map_str);
-	set_zx_zy(map);
+	set_x1_y1(map);
 	return (map);
 }

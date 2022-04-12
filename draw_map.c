@@ -6,11 +6,16 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/11 21:37:12 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/12 03:51:41 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+// #define ZOOM 20
+// #define ANGLE 0.8
+// #define SHIFT_X 1000
+// #define SHIFT_Y 200
 
 float	abs_max(float a, float b)
 {
@@ -29,58 +34,150 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	if (x >= 1920 || y >= 1080)
 	{
-		// ft_putchar_fd('-', 1);
+		ft_putchar_fd('-', 1);
 		data->non_print++;
 		return ;
 	}
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 	(void) color;
-	// ft_putchar_fd('+', 1);
+	ft_putchar_fd('+', 1);
 	data->print++;
 }
 
-void	init_pixel(t_pixel *pixel, char x_or_y, t_fdf *map)
-{
-	pixel->x = (float)map->head->x;
-	pixel->x1 = (float)map->head->x;
-	if (x_or_y == 'x')
-	{
-		pixel->x1++;
-		pixel->z1 = map->head->zx;
-	}
-	pixel->y = (float)map->head->y;
-	pixel->y1 = (float)map->head->y;
-	if (x_or_y == 'y')
-	{
-		pixel->y1++;
-		pixel->z1 = map->head->zy;
-	}
-	pixel->z = map->head->z;
-	pixel->color = map->head->color;
-}
+// void	bresenham(t_fdf *map, t_point *point, int x1, int y1)
+// {
+// 	int		x;
+// 	int		y;
+// 	t_steps	steps;
+// 	// int		i;
+	
+// 	// i = 1;
+// 	x = point->x;
+// 	y = point->y;
+// 	steps.x_step = x1 - x;
+// 	steps.y_step = y1 - y;
+// 	steps.max = abs_max(steps.x_step, steps.y_step);
+// 	steps.x_step /= steps.max;
+// 	steps.y_step /= steps.max;
+// 	while ((int)(x - x1) || (int)(y - y1))
+// 	{
+// 		// ft_printf("%10d. x = %d y = %d z = %d color = %X\n",
+// 		// 	i++, map->head->x, map->head->y, map->head->z, map->head->color);
+// 		my_mlx_pixel_put(map->data, x, y, point->color);
+// 		x += steps.x_step;
+// 		y += steps.y_step;
+// 	}
+// 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data->img, 0, 0);
+// }
 
 void	draw_map(t_fdf *map)
 {
-	t_point	*fix;
-	t_pixel	pixel;
-
-	fix = map->head;
-	while (map->head)
+	t_point *fix;
+	int i;
+	
+	// printf("START DRAW: OK\n");
+	i = 0;
+	fix = map->head;	
+	while (map->head->next)
 	{
-		init_pixel(&pixel, 'x', map);
-		if (pixel.x < map->width - 1)
-			bresenham(pixel, map);
-		init_pixel(&pixel, 'y', map);
-		if (pixel.y < map->height - 1)
-			bresenham(pixel, map);
+		
+		// ft_printf("%10d. x = %d y = %d z = %d color = %X\n",
+			// i++, map->head->x, map->head->y, map->head->z, map->head->color);
+		if (map->head->x1)//(map->head->x < map->width - 1)
+			bresenham(map, map->head->x1->x, map->head->y, map->head->x1->z);
+		if (map->head->y1)//(map->head->y < map->height - 1)
+			bresenham(map, map->head->x, map->head->y1->y, map->head->y1->z);
 		map->head = map->head->next;
 	}
 	map->head = fix;
-	ft_putchar_fd('\n', 1);
-	ft_printf("  PRINTED PIXELS AMOUNT [%d]\n", map->data->print);
-	ft_printf("NON PRINT PIXELS AMOUNT [%d]\n", map->data->non_print);
+	// printf("FINISH DRAW: OK\n");
 }
+
+// void	set_color(t_point *point)
+// {
+// 	if (point->z > 0)
+// 		point->color = 0X00CC00;
+// 	else if (point->z < 0)
+// 		point->color = 0XCC0000;
+// 	else
+// 		point->color = 0X0000CC;
+// }
+
+// void	set_map_values(t_fdf *map)
+// {
+// 	t_point	*fix;
+// 	int		i;
+
+// 	i = 1;
+// 	fix = map->head;	
+// 	while(map->head)
+// 	{
+// 		// printf("TOTALLY %d POINTS\n", i++);
+// 		set_color(map->head);
+// 		map->head->z *= ZOOM;
+// 		map->head->x = (map->head->x *ZOOM - map->head->y *ZOOM) * cos(ANGLE) + SHIFT_X;
+// 		map->head->y = (map->head->x *ZOOM + map->head->y *ZOOM) * sin(ANGLE) - map->head->z + SHIFT_Y;
+// 		// if (map->head->x1)
+// 		// 	map->head->x_step = map->head->x1->x - map->head->x;
+// 		// if (map->head->y1)
+// 		// 	map->head->y_step = map->head->y1->y - map->head->y;
+// 		// if (map->head->x_step && map->head->y_step)
+// 		// {
+// 		// 	map->head->max = abs_max(map->head->x_step, map->head->y_step);
+// 		// 	map->head->x_step /= map->head->max;
+// 		// 	map->head->y_step /= map->head->max;
+// 		// }
+// 		// ft_printf("%10d. x = %d y = %d z = %d color = %X\n",
+// 		// 	i++, map->head->x, map->head->y, map->head->z, map->head->color);
+// 		map->head = map->head->next;
+// 	}
+// 	map->head = fix;
+// 	printf("CALCULATIONS: OK\n");
+// 	draw_map(map);
+// }
+
+// void	init_pixel(t_pixel *pixel, char x_or_y, t_fdf *map)
+// {
+// 	pixel->x = (float)map->head->x;
+// 	pixel->x1 = (float)map->head->x;
+// 	if (x_or_y == 'x')
+// 	{
+// 		pixel->x1++;
+// 		pixel->z1 = map->head->zx;
+// 	}
+// 	pixel->y = (float)map->head->y;
+// 	pixel->y1 = (float)map->head->y;
+// 	if (x_or_y == 'y')
+// 	{
+// 		pixel->y1++;
+// 		pixel->z1 = map->head->zy;
+// 	}
+// 	pixel->z = map->head->z;
+// 	pixel->color = map->head->color;
+// }
+
+// void	draw_map(t_fdf *map)
+// {
+// 	t_point	*fix;
+// 	t_pixel	pixel;
+
+// 	fix = map->head;
+// 	while (map->head)
+// 	{
+// 		init_pixel(&pixel, 'x', map);
+// 		if (pixel.x < map->width - 1)
+// 			bresenham(pixel, map);
+// 		init_pixel(&pixel, 'y', map);
+// 		if (pixel.y < map->height - 1)
+// 			bresenham(pixel, map);
+// 		map->head = map->head->next;
+// 	}
+// 	map->head = fix;
+// 	ft_putchar_fd('\n', 1);
+// 	ft_printf("  PRINTED PIXELS AMOUNT [%d]\n", map->data->print);
+// 	ft_printf("NON PRINT PIXELS AMOUNT [%d]\n", map->data->non_print);
+// }
 
 // void	draw_map(t_fdf *map)
 // {
