@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/13 23:28:18 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/14 04:32:40 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,23 @@ typedef struct s_steps
 	int		max;
 }	t_steps;
 
-typedef struct pixel
+// typedef struct pixel
+// {
+// 	float			x;
+// 	float			x1;
+// 	float			y;
+// 	float			y1;
+// 	int				z;
+// 	int				z1;
+// 	int				color;
+// }	t_pixel;
+
+typedef	struct s_pixel
 {
-	float			x;
-	float			x1;
-	float			y;
-	float			y1;
-	int				z;
-	int				z1;
-	int				color;
+	float	x;
+	float	y;
+	int		z;
+	int		color;
 }	t_pixel;
 
 typedef struct s_point
@@ -110,12 +118,10 @@ int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
 
 int		key_hook(int keycode, t_fdf *map);
-void	set_map_values(t_fdf *map);
 void	draw_map(t_fdf *map);
-float	abs_max(float a, float b);
-void	bresenham(t_fdf *map, char x_or_y);
-// void	bresenham(t_pixel *pixel, t_fdf *map);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+// float	abs_max(float a, float b);
+// void	bresenham(t_fdf *map, char x_or_y);
+// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	error_free_map_win_exit(t_fdf *map, int err);
 
 void	check_leak(void);

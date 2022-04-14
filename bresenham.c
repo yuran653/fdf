@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 02:31:16 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/13 23:48:33 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/14 02:19:59 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void	set_zoom(t_pixel *pixel, t_fdf *map)
 
 void	set_color(t_pixel *pixel, t_fdf *map)
 {
-	if (pixel->z > 0)// || z1 > 0)
+	if (pixel->z > 0)
 		pixel->color = 0X00CC00;
-	else if (pixel->z < 0)// || pixel->z1 < 0)
+	else if (pixel->z < 0)
 		pixel->color = 0XCC0000;
 	else
 		pixel->color = 0X0000CC;
@@ -65,41 +65,31 @@ void	init_pixel(t_pixel *pixel, t_fdf *map, char x_or_y)
 	pixel->z1 = map->head->z;
 	pixel->x = (float)map->head->x;
 	pixel->x1 = (float)map->head->x;
-	if (map->head->x1 && x_or_y == 'x')//(map->head->x1)
+	if (map->head->x1 && x_or_y == 'x')
 	{
 		pixel->x1 = (float)map->head->x1->x;
 		pixel->z1 = map->head->x1->z;
-		// if (x_or_y == 'x')
-		// 	pixel->z1 = map->head->x1->z;
 	}
 	pixel->y = (float)map->head->y;
 	pixel->y1 = (float)map->head->y;
-	if (map->head->y1 && x_or_y == 'y')//(map->head->y1)
+	if (map->head->y1 && x_or_y == 'y')
 	{
 			pixel->y1 = (float)map->head->y1->y;
 			pixel->z1 = map->head->y1->z;
-			// if (x_or_y == 'y')
-			// 	pixel->z1 = map->head->y1->z;
 	}
 	pixel->color = map->head->color;
 }
 
-// void	bresenham(t_pixel *pixel, t_fdf *map)
 void	bresenham(t_fdf *map, char x_or_y)
 {
 	t_steps	steps;
 	t_pixel pixel;
 
 	init_pixel(&pixel, map, x_or_y);
-	// printf("x = [%f] x1 = [%f] y = [%f] y1 = [%f] z = [%d] z1 = [%d]\n",
-	// 	pixel.x, pixel.x1, pixel.y, pixel.y1, pixel.z, pixel.z1);
-	// pixel.z = map->z[(int)pixel.y][(int)pixel.x];
-	// pixel.z1 = map->z[(int)pixel.y1][(int)pixel.x1];
 	set_color(&pixel, map);
 	set_zoom(&pixel, map);
 	set_isometric(&pixel, map);
 	set_shift(&pixel, map);
-	// printf("x = %2f | y = %2f\n", pixel.x, pixel.y);
 	steps.x_step = pixel.x1 - pixel.x;
 	steps.y_step = pixel.y1 - pixel.y;
 	steps.max = abs_max(steps.x_step, steps.y_step);
