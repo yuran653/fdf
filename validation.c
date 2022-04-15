@@ -6,49 +6,18 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/12 03:27:24 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:19:46 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	set_x1_y1(t_fdf *map)
-{
-	t_point	*fix;
-	t_point	*y1;
-
-	y1 = map->head;
-	while (!y1->y)
-		y1= y1->next;
-	fix = map->head;
-	while (map->head)
-	{
-		if (y1 && map->head->y < map->height - 1)
-		{
-			map->head->y1 = y1;
-			y1 = y1->next;
-		}
-		// if (y1)
-		// {
-		// 	if (map->head->y < map->height - 1)
-		// 	{
-		// 		map->head->y1 = y1;
-		// 		y1 = y1->next;
-		// 	}
-		// }
-		if (map->head->next)
-			if (map->head->y == map->head->next->y)
-				map->head->x1 = map->head->next;
-		map->head = map->head->next;
-	}
-	map->head = fix;
-}
 
 void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 {
 	int	err;
 	int	width;
 
+	// ft_printf("----GET VALUES START  [%3d]---\n", height);
 	width = 0;
 	while (str_split[width])
 		width++;
@@ -56,15 +25,23 @@ void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 		map->width = width;
 	else if (map->width != width)
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
+	map->matrix[height] = (t_point *)malloc(sizeof(t_point) * (map->width + 1));
+	if (!map->matrix[height])
+		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+	printf("map->matrix[%3d] = %p\n", height, map->matrix[height]);
+	map->matrix[width] = NULL;
 	width = 0;
 	while (width < map->width)
 	{
+		// ft_printf("---FILL VALUES START  [%3d]---\n", width);
 		err = fill_values(map, str_split, width++, height);
 		if (err == 1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
 		if (err == -1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
+		// ft_printf("---FILL VALUES FINISH [%3d]---\n", width - 1);
 	}
+	// ft_printf("----GET VALUES FINISH [%3d]---\n", height);
 }
 
 void	get_width(t_fdf *map, char *map_str)
@@ -116,6 +93,20 @@ char	*get_height(t_fdf *map, int fd)
 	return (NULL);
 }
 
+t_point	**calloc_matrix(t_fdf *map, char *str)
+{
+	int		y;
+	t_point	**matrix;
+
+	y = 0;
+	matrix = (t_point **)malloc(sizeof(t_point *) * (map->height + 1));
+	if (!matrix)
+		error_free_str_exit(map, str);
+	while (y <= map->height)
+		matrix[y++] = NULL;
+	return (matrix);
+}
+
 t_fdf	*validation(char *argv)
 {
 	t_fdf	*map;
@@ -128,15 +119,14 @@ t_fdf	*validation(char *argv)
 	map = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!map)
 		error_common();
-	map->head = NULL;
-	map->end = NULL;
+	map->matrix = NULL;
 	map->data = NULL;
 	map_str = get_height(map, fd);
 	if (!map_str)
 		error_free_exit(map);
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
+	map->matrix = calloc_matrix(map, map_str);
 	get_width(map, map_str);
-	set_x1_y1(map);
 	return (map);
 }

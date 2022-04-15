@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/14 01:22:28 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:14:55 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,72 +29,61 @@ int	main(int argc, char **argv)
 	map->data = (t_data *)malloc(sizeof(t_data));
 	if (!map->data)
 		error_free_map_exit(map);
-	map->mlx_ptr = mlx_init();
-	map->win_ptr = mlx_new_window(map->mlx_ptr, 1920, 1080, "FDF");
-	map->data->print = 0;
-	map->data->non_print = 0;
-	map->data->img = mlx_new_image(map->mlx_ptr, 1920, 1080);
-	map->data->addr = mlx_get_data_addr(map->data->img,
-		&map->data->bits_per_pixel, &map->data->line_length, &map->data->endian);
-	draw_map(map);
-	mlx_key_hook(map->win_ptr, key_hook, map);
-	mlx_loop(map->mlx_ptr);
+
+	// int	x;
+	// int	y;
+	// for (y = 0; y < map->height; y++)
+	// {
+	// 	for (x = 0; x < map->width; x++)
+	// 		ft_printf("%3d ",map->matrix[y][x].z);
+	// 	ft_printf("\n");
+	// }
+	// for (y = 0; y < map->height; y++)
+	// {
+	// 	for (x = 0; x < map->width; x++)
+	// 		ft_printf("%7X ", map->matrix[y][x].color);
+	// 	ft_printf("\n");
+	// }
+
+	// map->mlx_ptr = mlx_init();
+	// map->win_ptr = mlx_new_window(map->mlx_ptr, 1920, 1080, "FDF");
+	// map->data->print = 0;
+	// map->data->non_print = 0;
+	// map->data->img = mlx_new_image(map->mlx_ptr, 1920, 1080);
+	// map->data->addr = mlx_get_data_addr(map->data->img,
+	// 	&map->data->bits_per_pixel, &map->data->line_length, &map->data->endian);
+	// draw_map(map);
+	// mlx_key_hook(map->win_ptr, key_hook, map);
+	// mlx_loop(map->mlx_ptr);
 	free_map(map);
 	return (0);
 }
 
-	// t_point *fix;
-		
-	// 	fix = map->head;
-	// 	while (map->head)
-	// 	{
-	// 		ft_printf("%3d", map->head->z);
-	// 		if (map->head->x == map->width - 1)
-	// 			ft_printf("\n");
-	// 		map->head = map->head->next;
-	// 	}
-	// 	map->head = fix;
+	// int	x;
+	// int	y;
+	// for (y = 0; y < map->height; y++)
+	// {
+	// 	for (x = 0; x < map->width; x++)
+	// 		ft_printf("%3d ",map->matrix[y][x].z);
 	// 	ft_printf("\n");
-	// 	fix = map->head;
-	// 	while (map->head)
-	// 	{
-	// 		ft_printf("%7X", map->head->color);
-	// 		if (map->head->x == map->width - 1)
-	// 			ft_printf("\n");
-	// 		map->head = map->head->next;
-	// 	}
-	// 	map->head = fix;
+	// }
+	// for (y = 0; y < map->height; y++)
+	// {
+	// 	for (x = 0; x < map->width; x++)
+	// 		ft_printf("%7X ", map->matrix[y][x].color);
+	// 	ft_printf("\n");
+	// }
 
-	// t_point *fix;
-	
-	// fix = map->head;
-	// while (map->head)
+	// int	x;
+	// int	y;
+	// for (y = 0; y < map->height; y++)
 	// {
-	// 	if (map->head->x1)
-	// 		ft_printf("%4d %4d ->", map->head->z, map->head->x1->z);
-	// 	if (map->head->x == map->width - 1)
-	// 		ft_printf("\n");
-	// 	map->head = map->head->next;
+	// 	for (x = 0; x < map->width; x++)
+	// 	{
+	// 		if (!map->matrix[y][x].x)
+	// 			ft_printf("\n");
+	// 		ft_printf("[%2d |%2d |%2d |%7X] ",
+	// 			map->matrix[y][x].x, map->matrix[y][x].y, map->matrix[y][x].z, map->matrix[y][x].color);
+	// 	}
+	// 	ft_printf("\n\n");
 	// }
-	// map->head = fix;
-	// ft_printf("\n");
-	// fix = map->head;
-	// while (map->head)
-	// {
-	// 	if (map->head->y1)
-	// 		ft_printf("%4d ->%4d |", map->head->z, map->head->y1->z);
-	// 	if (map->head->x == map->width - 1)
-	// 		ft_printf("\n");
-	// 	map->head = map->head->next;
-	// }
-	// map->head = fix;
-	// ft_printf("\n");
-	// fix = map->head;
-	// while (map->head)
-	// {
-	// 	ft_printf("%7X", map->head->color);
-	// 	if (map->head->x == map->width - 1)
-	// 		ft_printf("\n");
-	// 	map->head = map->head->next;
-	// }
-	// map->head = fix;

@@ -12,34 +12,17 @@
 
 #include "fdf.h"
 
-void	append_point(t_fdf *map, t_point *point)
+t_point	init_point(int x, int y, int z, int color)
 {
-	if (!map->end)
-		map->head = point;
-	else
-		map->end->next = point;
-	map->end = point;
-}
+	t_point point;
 
-t_point	*init_point(int x, int y, int z, int color)
-{
-	t_point *point;
-
-	point = (t_point *) malloc(sizeof(t_point));
-	if (!point)
-		return (NULL);
-	point->x = x;
-	point->y = y;
-	point->z = z;
-	// point->zx = 0;
-	// point->zy = 0;
-	// point->x_step = 0;
-	// point->y_step = 0;
-	// point->max = 0;
-	point->color = color;
-	point->x1 = NULL;
-	point->y1 = NULL;
-	point->next = NULL;
+	ft_printf("START INIT_POINT\n");
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	point.color = color;
+	ft_printf("x = %d, y = %d, z = %d color = %X\n", point.x, point.y, point.z, point.color);
+	ft_printf("FINISH INIT_POINT\n");
 	return (point);
 }
 
@@ -74,8 +57,9 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 {
 	char	**num_color;
 	int		color;
-	t_point	*point;
 
+	// if (y == 27)
+	// 	ft_printf("\tBEFORE SEGFAULT height = %d width = %d\n", map->height, map->width);
 	num_color = ft_split(str_split[x], ',');
 	if (!num_color)
 		return(error_map_return((void **)num_color, -1));
@@ -89,10 +73,14 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	}
 	else
 		color = 0XFFFFFF;
-	point = init_point(x, y, ft_atoi(num_color[0]), color);
-	if (!point)
-		return(error_map_return((void **)num_color, -1));
-	append_point(map, point);
+	// map->matrix[y][x] = init_point(x, y, ft_atoi(num_color[0]), color);
+	// if (y == 27)
+	// 	ft_printf("\t-----OK-----\n");
 	free_array((void **)num_color);
+	// if (y == 27)
+	// 	ft_printf("\tEXIT FILL VALUES\n");
+	(void) map;
+	(void) x;
+	(void) y;
 	return (0);
 }

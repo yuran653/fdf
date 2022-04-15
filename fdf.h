@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/14 04:32:40 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/15 01:59:14 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,25 +46,25 @@ typedef struct s_steps
 // 	int				color;
 // }	t_pixel;
 
-typedef	struct s_pixel
-{
-	float	x;
-	float	y;
-	int		z;
-	int		color;
-}	t_pixel;
+// typedef struct s_point
+// {
+// 	int				x;
+// 	int				y;
+// 	int				z;
+// 	// int				zx;
+// 	// int				zy;
+// 	int				color;
+// 	struct s_point	*x1;
+// 	struct s_point	*y1;
+// 	struct s_point	*next;
+// }	t_point;
 
 typedef struct s_point
 {
 	int				x;
 	int				y;
 	int				z;
-	// int				zx;
-	// int				zy;
 	int				color;
-	struct s_point	*x1;
-	struct s_point	*y1;
-	struct s_point	*next;
 }	t_point;
 
 typedef struct	s_data {
@@ -79,8 +79,7 @@ typedef struct	s_data {
 
 typedef struct s_fdf
 {
-	t_point	*head;
-	t_point	*end;
+	t_point	**matrix;
 	int		width;
 	int		height;
 	int		zoom;
@@ -102,8 +101,6 @@ int		get_color(char *hex, int i);
 int		array_len(char **array);
 int		check_digit(char *arg);
 int		check_hex(char hex, char *base);
-t_point	*init_point(int x, int y, int z, int color);
-void	append_point(t_fdf *map, t_point *point);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);
 void	free_map(t_fdf *map);
