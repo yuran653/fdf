@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/15 04:19:46 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/15 06:27:27 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 	int	err;
 	int	width;
 
-	// ft_printf("----GET VALUES START  [%3d]---\n", height);
 	width = 0;
 	while (str_split[width])
 		width++;
@@ -25,7 +24,7 @@ void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 		map->width = width;
 	else if (map->width != width)
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
-	map->matrix[height] = (t_point *)malloc(sizeof(t_point) * (map->width + 1));
+	map->matrix[height] = (t_point *)malloc(sizeof(t_point) * (map->width));
 	if (!map->matrix[height])
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
 	printf("map->matrix[%3d] = %p\n", height, map->matrix[height]);
@@ -33,15 +32,12 @@ void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 	width = 0;
 	while (width < map->width)
 	{
-		// ft_printf("---FILL VALUES START  [%3d]---\n", width);
 		err = fill_values(map, str_split, width++, height);
 		if (err == 1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 1);
 		if (err == -1)
 			error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
-		// ft_printf("---FILL VALUES FINISH [%3d]---\n", width - 1);
 	}
-	// ft_printf("----GET VALUES FINISH [%3d]---\n", height);
 }
 
 void	get_width(t_fdf *map, char *map_str)

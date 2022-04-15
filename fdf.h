@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/15 01:59:14 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/15 07:18:38 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,36 +35,12 @@ typedef struct s_steps
 	int		max;
 }	t_steps;
 
-// typedef struct pixel
-// {
-// 	float			x;
-// 	float			x1;
-// 	float			y;
-// 	float			y1;
-// 	int				z;
-// 	int				z1;
-// 	int				color;
-// }	t_pixel;
-
-// typedef struct s_point
-// {
-// 	int				x;
-// 	int				y;
-// 	int				z;
-// 	// int				zx;
-// 	// int				zy;
-// 	int				color;
-// 	struct s_point	*x1;
-// 	struct s_point	*y1;
-// 	struct s_point	*next;
-// }	t_point;
-
 typedef struct s_point
 {
-	int				x;
-	int				y;
-	int				z;
-	int				color;
+	float	x;
+	float	y;
+	int		z;
+	int		color;
 }	t_point;
 
 typedef struct	s_data {
@@ -73,8 +49,8 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		non_print;
-	int		print;
+	// int		non_print;
+	// int		print;
 }	t_data;
 
 typedef struct s_fdf
@@ -82,10 +58,10 @@ typedef struct s_fdf
 	t_point	**matrix;
 	int		width;
 	int		height;
-	int		zoom;
-	int		shift_x;
-	int		shift_y;
-	float	angle;
+	// int		zoom;
+	// int		shift_x;
+	// int		shift_y;
+	// float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
@@ -116,9 +92,6 @@ void	error_file(char *file_name, int fd);
 
 int		key_hook(int keycode, t_fdf *map);
 void	draw_map(t_fdf *map);
-// float	abs_max(float a, float b);
-// void	bresenham(t_fdf *map, char x_or_y);
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	error_free_map_win_exit(t_fdf *map, int err);
 
 void	check_leak(void);
