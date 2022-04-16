@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/15 07:18:38 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/16 06:20:25 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	// int		non_print;
-	// int		print;
+	int		non_print;
+	int		print;
 }	t_data;
 
 typedef struct s_fdf
@@ -58,10 +58,10 @@ typedef struct s_fdf
 	t_point	**matrix;
 	int		width;
 	int		height;
-	// int		zoom;
+	int		zoom;
 	// int		shift_x;
 	// int		shift_y;
-	// float	angle;
+	float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 02:39:55 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/15 07:24:26 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:00:40 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	free_array(void **array)
 	while (array[i])
 		free(array[i++]);
 	free(array);
+	array = NULL;
 }
 
 void	free_array_2(void **array1, void **array2)
@@ -34,5 +35,7 @@ void	free_map(t_fdf *map)
 		free_array((void **)map->matrix);
 	if (map->data)
 		free(map->data);
+	map->data = NULL;
 	free(map);
+	map = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/15 06:27:27 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/16 02:02:56 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	get_values(t_fdf *map, char **map_split, char **str_split, int height)
 	map->matrix[height] = (t_point *)malloc(sizeof(t_point) * (map->width));
 	if (!map->matrix[height])
 		error_free_all_exit(map, (void **)map_split, (void **)str_split, 0);
-	printf("map->matrix[%3d] = %p\n", height, map->matrix[height]);
-	map->matrix[width] = NULL;
 	width = 0;
 	while (width < map->width)
 	{

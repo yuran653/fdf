@@ -6,16 +6,16 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/15 06:38:52 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/16 03:02:01 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
 SRCS		=	fdf.c			validation.c		get_map.c\
-				check_utils.c	free_func.c\
 				draw_map.c		key_hook.c\
-				error_free.c	error_exit.c		win_exit.c\
+				error_free.c	error_exit.c\
+				free_func.c		win_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 #				bresenham.c\
 
@@ -27,7 +27,7 @@ D_FILES		=	$(patsubst %.c,%.d,$(SRCS))
 
 INCLUDES	=	-I.
 
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -g
 
 CC			=	gcc
 
