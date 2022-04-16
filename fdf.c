@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/16 06:56:20 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/16 06:59:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	check_leak(void)
 
 void	set_default(t_fdf *map)
 {
-	float	x_min;
-	float	x_max;
 	float	x;
 	float	y;
+	// float	x_min;
+	// float	x_max;
 	
-	x = map->width;
-	y = map->height;
-	x_min = -y * cos(map->angle);
-	x_max = x * cos(map->angle);
-	printf("X_MIN = %f | X_MAX = %f\n", x_min, x_max);
+	// x_min = -(map->height - 1) * cos(map->angle);
+	// x_max = (map->width - 1) * cos(map->angle);
+	x = map->width - 1;
+	y = map->height - 1;
 	map->angle = 0.8;
-	map->zoom = (x_max - x_min) * 0.8;
+	map->zoom = (x * cos(map->angle) + y * cos(map->angle)) * 0.8;
+	// map->zoom = (x_max - x_min) * 0.8;
 }
 
 int	main(int argc, char **argv)
