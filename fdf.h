@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/16 06:20:25 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/18 18:32:59 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 #  define BASE16 "0123456789ABCDEF"
 # endif
 
+# ifndef SCR_WIDTH
+#  define SCR_WIDTH 1920
+# endif
+
+# ifndef SCR_HEIGHT
+#  define SCR_HEIGHT 1080
+# endif
+
 typedef struct s_steps
 {
 	float	x_step;
@@ -40,6 +48,7 @@ typedef struct s_point
 	float	x;
 	float	y;
 	int		z;
+	int		z_color;
 	int		color;
 }	t_point;
 
@@ -59,12 +68,20 @@ typedef struct s_fdf
 	int		width;
 	int		height;
 	int		zoom;
-	// int		shift_x;
-	// int		shift_y;
+	int		zoom_check;
 	float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
+	float	x_min;
+	float	x_max;
+	float	y_min;
+	float	y_max;
+	int		z_min;
+	int		z_max;
+	int		z_shift;
+	int		x_shift;
+	int		y_shift;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);
@@ -90,8 +107,12 @@ void	error_map(void);
 int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
 
-int		key_hook(int keycode, t_fdf *map);
 void	draw_map(t_fdf *map);
+float	abs_max(float a, float b);
+float	ft_abs(float a);
+int		ft_min(int a, int b);
+int		ft_max(int a, int b);
+int		key_hook(int keycode, t_fdf *map);
 void	error_free_map_win_exit(t_fdf *map, int err);
 
 void	check_leak(void);

@@ -81,6 +81,20 @@ int	get_color(char *hex, int i)
 	return (hex_num);
 }
 
+void	set_z_min_max(t_fdf *map, int x, int y)
+{
+	if (x == 0 && y == 0)
+	{
+		map->z_min = map->matrix[y][x].z;
+		map->z_max = map->matrix[y][x].z;
+	}
+	else
+	{
+		map->z_min = ft_min(map->z_min, map->matrix[y][x].z);
+		map->z_max = ft_max(map->z_max, map->matrix[y][x].z);
+	}
+}
+
 int	fill_values(t_fdf *map, char **str_split, int x, int y)
 {
 	char	**num_color;
@@ -90,9 +104,21 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 		return(error_map_return((void **)num_color, -1));
 	if (array_len(num_color) > 2 || check_digit(num_color[0]))
 		return(error_map_return((void **)num_color, 1));
-	map->matrix[y][x].x = x;
-	map->matrix[y][x].y = y;
+	map->matrix[y][x].x = x - map->width / 2;
+	map->matrix[y][x].y = y - map->height / 2;
 	map->matrix[y][x].z = ft_atoi(num_color[0]);
+	map->matrix[y][x].z_color = map->matrix[y][x].z;
+	set_z_min_max(map, x, y);
+	// if (x == 0 && y == 0)
+	// {
+	// 	map->z_min = map->matrix[y][x].z;
+	// 	map->z_max = map->matrix[y][x].z;
+	// }
+	// else
+	// {
+	// 	map->z_min = ft_min(map->z_min, map->matrix[y][x].z);
+	// 	map->z_max = ft_max(map->z_max, map->matrix[y][x].z);
+	// }
 	if (num_color[1])
 	{
 		map->matrix[y][x].color = get_color(num_color[1], 0);

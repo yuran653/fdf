@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/16 02:02:56 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/18 14:58:26 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ t_fdf	*validation(char *argv)
 	if (close(fd) == -1)
 		error_free_str_exit(map, map_str);
 	map->matrix = calloc_matrix(map, map_str);
+	// map->z_min = 0;
+	// map->z_max = 0;
 	get_width(map, map_str);
 	return (map);
 }
