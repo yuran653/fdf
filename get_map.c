@@ -97,7 +97,7 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	map->matrix[y][x].x = x - map->width / 2;
 	map->matrix[y][x].y = y - map->height / 2;
 	map->matrix[y][x].z = ft_atoi(num_color[0]);
-	map->matrix[y][x].z_color = map->matrix[y][x].z;
+	map->matrix[y][x].z_default = map->matrix[y][x].z;
 	set_z_min_max(map, x, y);
 	if (num_color[1])
 	{
@@ -107,6 +107,7 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	}
 	else
 		map->matrix[y][x].color = 0XFFFFFF;
+	map->matrix[y][x].color_default = map->matrix[y][x].color;
 	free_array((void **)num_color);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 12:16:57 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/19 18:02:03 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 void	check_leak(void)
 {
 	exit(0);
+}
+
+static void	set_default_zoom(t_fdf *map)
+{
+	map->zoom = ft_max(map->width / 2, map->height / 2);
+	map->zoom = ft_max(map->zoom, map->z_shift);
+	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3 / map->zoom;
 }
 
 void	set_default(t_fdf *map)
@@ -34,13 +41,15 @@ void	set_default(t_fdf *map)
 	{
 		x = -1;
 		while (++x < map->width)
-			map->matrix[y][x].z -= map->z_shift;
+		{
+			map->matrix[y][x].color = map->matrix[y][x].color_default;	
+			map->matrix[y][x].z = map->matrix[y][x].z_default - map->z_shift;
+		}
 	}
 	map->x_shift = SCR_WIDTH / 2;
 	map->y_shift = SCR_HEIGHT / 2;
-	map->zoom = ft_max(map->width / 2, map->height / 2);
-	map->zoom = ft_max(map->zoom, map->z_shift);
-	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3 / map->zoom;
+	set_default_zoom(map);
+	map->clr_opt = 1;
 }
 
 int	main(int argc, char **argv)

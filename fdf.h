@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 12:18:49 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/19 19:30:21 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ typedef struct s_point
 {
 	float	x;
 	float	y;
-	int		z;
-	int		z_color;
+	float	z;
+	int		z_default;
 	int		color;
+	int		color_default;
 }	t_point;
 
 typedef struct	s_data {
@@ -73,6 +74,7 @@ typedef struct s_fdf
 	int		x_shift;
 	int		y_shift;
 	int		zoom;
+	int		clr_opt;
 	float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -107,6 +109,8 @@ int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
 
 void	draw_map(t_fdf *map);
+void	set_default(t_fdf *map);
+void	set_color(t_point *point, t_point *point1, int clr_opt);
 int		key_hook(int keycode, t_fdf *map);
 void	error_free_map_win_exit(t_fdf *map, int err);
 
