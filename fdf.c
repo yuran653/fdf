@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/18 18:57:37 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:16:57 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,12 @@ void	check_leak(void)
 	exit(0);
 }
 
-float	ft_abs(float a)
-{
-	if (a < 0)
-		a *= -1;
-	return (a);
-}
-
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
-int	ft_max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 void	set_default(t_fdf *map)
 {
 	int	x;
 	int	y;
 	
 	map->angle = 0.8;
-	map->zoom = 1;//30 * 0.7;
 	if (map->z_min >= 0 && map->z_max >= 0)
 		map->z_shift = (map->z_max - map->z_min) / 2;
 	else if (map->z_min < 0 && map->z_max < 0)
@@ -60,13 +38,9 @@ void	set_default(t_fdf *map)
 	}
 	map->x_shift = SCR_WIDTH / 2;
 	map->y_shift = SCR_HEIGHT / 2;
-	// map->zoom = ft_max(map->width / 2, map->height / 2);
-	// map->zoom = ft_max(map->zoom_check, map->z_shift);
-	// map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 5 / map->zoom;
-	map->x_min = -1000;
-	map->x_max = 0;
-	map->y_min = -1000;
-	map->y_max = 0;
+	map->zoom = ft_max(map->width / 2, map->height / 2);
+	map->zoom = ft_max(map->zoom, map->z_shift);
+	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3 / map->zoom;
 }
 
 int	main(int argc, char **argv)

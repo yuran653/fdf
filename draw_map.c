@@ -6,33 +6,17 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/18 18:40:44 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/19 12:16:41 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-#define ZOOM 20
-#define ANGLE 0.8
-#define SHIFT_X 1000
-#define SHIFT_Y 200
-
-float	abs_max(float a, float b)
-{
-	if (a < 0)
-		a *= -1;
-	if (b < 0)
-		b *= -1;
-	if (a > b)
-		return (a);
-	return (b);
-}
-
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x < 0 && x >= SCR_WIDTH) || (y < 0 && y >= SCR_HEIGHT))
+	if (x < 0 || x >= SCR_WIDTH || y < 0 || y >= SCR_HEIGHT)
 	{
 		// ft_putchar_fd('-', 1);
 		data->non_print++;
@@ -65,13 +49,6 @@ void	bresenham(t_point point, t_point point1, t_fdf *map)
 
 t_point	set_values(t_point point, t_fdf *map)
 {
-	//-----------COLOR-----------
-	// point.color = 0X0000CC;
-	// if (point.z > 0)//|| point1.z > 0)
-	// 	point.color = 0X00CC00;
-	// if (point.z < 0)// || point1.z < 0)
-	// 	point.color = 0XCC0000;
-	
 	//-----------ZOOM------------
 	point.x *= map->zoom;
 	point.y *= map->zoom;
@@ -84,25 +61,9 @@ t_point	set_values(t_point point, t_fdf *map)
 	//-----------SHIFT-----------
 	point.x += map->x_shift;
 	point.y += map->y_shift;
-	// point.x += SCR_WIDTH / 2;
-	// point.y += SCR_HEIGHT / 2;
-
-	if (point.x > map->x_max)
-		map->x_max = point.x;
-	if (point.y > map->y_max)
-		map->y_max = point.y;
-	if (map->x_min == -1000)
-		map->x_min = point.x;
-	if (point.x < map->x_min)
-		map->x_min = point.x;
-	if (map->y_min == -1000)
-		map->y_min = point.y;
-	if (point.y < map->y_min)
-		map->y_min = point.y;
 
 	printf("POINT [%f, %f]\n", point.x, point.y);
 
-	// (void) map;	
 	return (point);
 }
 
@@ -140,15 +101,6 @@ void	draw_map(t_fdf *map)
 			}
 		}
 	}
-	printf("MIN X = %f | MAX X = %f | DIFF X = %f\n", map->x_min, map->x_max, map->x_max - map->x_min);
-	printf("MIN Y = %f | MAX Y = %f | DIFF Y = %f\n", map->y_min, map->y_max, map->y_max - map->y_min);
-	printf("SHIFT X = %d | SHIFT Y = %d\n", SCR_WIDTH / 2, SCR_HEIGHT / 2);
-	// printf("ZOOM X = %d | ZOOM Y = %d | ZOOM = %d\n",
-	// 	SCR_WIDTH / (int)(map->x_max - map->x_min), SCR_HEIGHT / (int)(map->y_max - map->y_min),
-	// 		ft_min(SCR_WIDTH / (int)(map->x_max - map->x_min), SCR_HEIGHT / (int)(map->y_max - map->y_min)));
-	printf("MIN Z = %d | MAX Z = %d | SHIFT Z = %d\n", map->z_min, map->z_max, map->z_shift);
-	// printf("ZOOM = %d | CHECK ZOOM = %d\n", map->zoom, map->zoom_check);	
-	printf("ZOOM = %d\n", map->zoom);	
 	ft_printf("    PRINTED PIXELS[%10d]\n", map->data->print);
 	ft_printf("NON-PRINTED PIXELS[%10d]\n", map->data->non_print);
 	ft_printf("      TOTAL PIXELS[%10d]\n", map->data->print + map->data->non_print);
@@ -157,11 +109,28 @@ void	draw_map(t_fdf *map)
 
 // printf("MIN X = %f | MAX X = %f | DIFF X = %f\n", map->x_min, map->x_max, map->x_max - map->x_min);
 // printf("MIN Y = %f | MAX Y = %f | DIFF Y = %f\n", map->y_min, map->y_max, map->y_max - map->y_min);
+// printf("SHIFT X = %d | SHIFT Y = %d\n", SCR_WIDTH / 2, SCR_HEIGHT / 2);
+// printf("MIN Z = %d | MAX Z = %d | SHIFT Z = %d\n", map->z_min, map->z_max, map->z_shift);
+
 
 // 	ft_printf("    PRINTED PIXELS[%10d]\n", map->data->print);
 // 	ft_printf("NON-PRINTED PIXELS[%10d]\n", map->data->non_print);
 // 	ft_printf("      TOTAL PIXELS[%10d]\n", map->data->print + map->data->non_print);
 // 	ft_printf("\n");
+
+// if (point.x > map->x_max)
+// 	map->x_max = point.x;
+// if (point.y > map->y_max)
+// 	map->y_max = point.y;
+// if (map->x_min == -1000)
+// 	map->x_min = point.x;
+// if (point.x < map->x_min)
+// 	map->x_min = point.x;
+// if (map->y_min == -1000)
+// 	map->y_min = point.y;
+// if (point.y < map->y_min)
+// 	map->y_min = point.y;
+
 
 //	---------ISOMETRIC---------
 // 	x = (x - y) * cos(angle);

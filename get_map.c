@@ -12,16 +12,6 @@
 
 #include "fdf.h"
 
-int	array_len(char **array)
-{
-	int	len;
-
-	len = 0;
-	while (array[len])
-		len++;
-	return (len);
-}
-
 int	check_hex(char hex, char *base)
 {
 	int	i;
@@ -109,16 +99,6 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	map->matrix[y][x].z = ft_atoi(num_color[0]);
 	map->matrix[y][x].z_color = map->matrix[y][x].z;
 	set_z_min_max(map, x, y);
-	// if (x == 0 && y == 0)
-	// {
-	// 	map->z_min = map->matrix[y][x].z;
-	// 	map->z_max = map->matrix[y][x].z;
-	// }
-	// else
-	// {
-	// 	map->z_min = ft_min(map->z_min, map->matrix[y][x].z);
-	// 	map->z_max = ft_max(map->z_max, map->matrix[y][x].z);
-	// }
 	if (num_color[1])
 	{
 		map->matrix[y][x].color = get_color(num_color[1], 0);
