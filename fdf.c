@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:29:48 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:43:06 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	set_default_zoom(t_fdf *map)
 {
 	map->zoom = ft_max(map->width / 2, map->height / 2);
 	map->zoom = ft_max(map->zoom, map->z_zoom);
-	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3 / map->zoom;
+	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 2.5 / map->zoom;
 }
 
 static void	set_z_shift_zoom(t_fdf *map)
@@ -48,14 +48,9 @@ void	set_default(t_fdf *map)
 	int	x;
 	int	y;
 
-	map->angle = 0.8;
+	map->rotate_smpl = 0.25;
+	map->angle = M_PI * map->rotate_smpl;
 	set_z_shift_zoom(map);
-	// if (map->z_min >= 0 && map->z_max >= 0)
-	// 	map->z_shift = (map->z_max - map->z_min) / 2;
-	// else if (map->z_min < 0 && map->z_max < 0)
-	// 	map->z_shift = (map->z_min - map->z_max) / 2;
-	// else
-	// 	map->z_shift = (map->z_min + map->z_max) / 2;
 	y = -1;
 	while (++y < map->height)
 	{

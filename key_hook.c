@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:12:08 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:21:17 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	key_hook(int keycode, t_fdf *map)
 		translate(keycode, map);
 	else if (keycode == 116 || keycode == 121)
 		stretch_compress(keycode, map);
+	else if (keycode == 12 || keycode == 14)
+		rotate_simple(keycode, map);
 	else
 	{
 		ft_printf("keycode = [%d]\n", keycode);
@@ -108,3 +110,5 @@ int	key_hook(int keycode, t_fdf *map)
 // pgdn -> 121
 // c -> 8
 // x -> 7
+// e -> 14
+// q -> 12

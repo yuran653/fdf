@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 19:28:43 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 20:38:58 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
+
+# ifndef _USE_MATH_DEFINES
+#  define _USE_MATH_DEFINES
+# endif
 
 # ifndef BASE16
 #  define BASE16 "0123456789ABCDEF"
@@ -75,6 +79,7 @@ typedef struct s_fdf
 	double	z_min;
 	double	z_max;
 	double	angle;
+	double	rotate_smpl;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
@@ -90,6 +95,7 @@ double	ft_abs(double a);
 double	abs_max(double a, double b);
 void	draw_map(t_fdf *map);
 void	set_default(t_fdf *map);
+void	rotate_simple(int keycode, t_fdf *map);
 int		key_hook(int keycode, t_fdf *map);
 void	check_leak(void);
 void	free_array(void **array);
