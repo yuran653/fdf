@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 15:02:26 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:29:48 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,27 @@ void	check_leak(void)
 static void	set_default_zoom(t_fdf *map)
 {
 	map->zoom = ft_max(map->width / 2, map->height / 2);
-	map->zoom = ft_max(map->zoom, map->z_shift);
+	map->zoom = ft_max(map->zoom, map->z_zoom);
 	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3 / map->zoom;
+}
+
+static void	set_z_shift_zoom(t_fdf *map)
+{
+	if (map->z_min >= 0 && map->z_max >= 0)
+	{
+		map->z_shift = (map->z_max - map->z_min) / 2;
+		map->zoom = map->z_shift;
+	}
+	else if (map->z_min < 0 && map->z_max < 0)
+	{
+		map->z_shift = (map->z_min - map->z_max) / 2;
+		map->zoom = map->z_shift;
+	}
+	else
+	{
+		map->z_shift = (map->z_min + map->z_max) / 2;
+		map->z_zoom = (ft_abs(map->z_min) + ft_abs(map->z_max)) / 2;
+	}
 }
 
 void	set_default(t_fdf *map)
@@ -30,12 +49,13 @@ void	set_default(t_fdf *map)
 	int	y;
 
 	map->angle = 0.8;
-	if (map->z_min >= 0 && map->z_max >= 0)
-		map->z_shift = (map->z_max - map->z_min) / 2;
-	else if (map->z_min < 0 && map->z_max < 0)
-		map->z_shift = (map->z_min - map->z_max) / 2;
-	else
-		map->z_shift = (map->z_min + map->z_max) / 2;
+	set_z_shift_zoom(map);
+	// if (map->z_min >= 0 && map->z_max >= 0)
+	// 	map->z_shift = (map->z_max - map->z_min) / 2;
+	// else if (map->z_min < 0 && map->z_max < 0)
+	// 	map->z_shift = (map->z_min - map->z_max) / 2;
+	// else
+	// 	map->z_shift = (map->z_min + map->z_max) / 2;
 	y = -1;
 	while (++y < map->height)
 	{

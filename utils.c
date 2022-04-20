@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 12:15:52 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:37:13 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:28:16 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,28 @@ int	array_len(char **array)
 	return (len);
 }
 
-float	ft_min(int a, int b)
+double	ft_min(double a, double b)
 {
 	if (a < b)
 		return (a);
 	return (b);
 }
 
-float	ft_max(int a, int b)
+double	ft_max(double a, double b)
 {
 	if (a > b)
 		return (a);
 	return (b);
 }
 
-float	ft_abs(float a)
+double	ft_abs(double a)
 {
 	if (a < 0)
 		a *= -1;
 	return (a);
 }
 
-float	abs_max(float a, float b)
+double	abs_max(double a, double b)
 {
 	if (a < 0)
 		a *= -1;

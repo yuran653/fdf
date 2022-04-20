@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:51:08 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 19:28:43 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,17 @@
 
 typedef struct s_steps
 {
-	float	x_step;
-	float	y_step;
+	double	x_step;
+	double	y_step;
 	int		max;
 }	t_steps;
 
 typedef struct s_point
 {
-	float	x;
-	float	y;
-	float	z;
-	float	z_default;
+	double	x;
+	double	y;
+	double	z;
+	double	z_default;
 	int		color;
 	int		color_default;
 }	t_point;
@@ -66,14 +66,15 @@ typedef struct s_fdf
 	t_point	**matrix;
 	int		width;
 	int		height;
+	int		clr_opt;
 	int		x_shift;
 	int		y_shift;
-	float	z_shift;
-	int		zoom;
-	int		clr_opt;
-	float	z_min;
-	float	z_max;
-	float	angle;
+	double	z_shift;
+	double	z_zoom;
+	double	zoom;
+	double	z_min;
+	double	z_max;
+	double	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_data	*data;
@@ -83,10 +84,10 @@ t_fdf	*validation(char *argv);
 void	valid_file_name(char *argv);
 int		fill_values(t_fdf *map, char **str_split, int x, int y);
 int		array_len(char **array);
-float	ft_min(int a, int b);
-float	ft_max(int a, int b);
-float	ft_abs(float a);
-float	abs_max(float a, float b);
+double	ft_min(double a, double b);
+double	ft_max(double a, double b);
+double	ft_abs(double a);
+double	abs_max(double a, double b);
 void	draw_map(t_fdf *map);
 void	set_default(t_fdf *map);
 int		key_hook(int keycode, t_fdf *map);
