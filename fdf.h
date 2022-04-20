@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:28:50 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:51:08 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ typedef struct s_fdf
 	t_point	**matrix;
 	int		width;
 	int		height;
-	int		z_min;
-	int		z_max;
-	int		z_shift;
 	int		x_shift;
 	int		y_shift;
+	float	z_shift;
 	int		zoom;
 	int		clr_opt;
+	float	z_min;
+	float	z_max;
 	float	angle;
 	void	*mlx_ptr;
 	void	*win_ptr;
@@ -83,8 +83,8 @@ t_fdf	*validation(char *argv);
 void	valid_file_name(char *argv);
 int		fill_values(t_fdf *map, char **str_split, int x, int y);
 int		array_len(char **array);
-int		ft_min(int a, int b);
-int		ft_max(int a, int b);
+float	ft_min(int a, int b);
+float	ft_max(int a, int b);
 float	ft_abs(float a);
 float	abs_max(float a, float b);
 void	draw_map(t_fdf *map);

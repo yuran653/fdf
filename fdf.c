@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:25:45 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 15:02:26 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	set_default(t_fdf *map)
 	if (map->z_min >= 0 && map->z_max >= 0)
 		map->z_shift = (map->z_max - map->z_min) / 2;
 	else if (map->z_min < 0 && map->z_max < 0)
-		map->z_shift = ft_abs((map->z_min - map->z_max) / 2);
+		map->z_shift = (map->z_min - map->z_max) / 2;
 	else
-		map->z_shift = (ft_abs(map->z_min) + ft_abs(map->z_max)) / 2;
+		map->z_shift = (map->z_min + map->z_max) / 2;
 	y = -1;
 	while (++y < map->height)
 	{
