@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 12:59:29 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:25:45 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	set_default(t_fdf *map)
 {
 	int	x;
 	int	y;
-	
+
 	map->angle = 0.8;
 	if (map->z_min >= 0 && map->z_max >= 0)
 		map->z_shift = (map->z_max - map->z_min) / 2;
@@ -42,7 +42,7 @@ void	set_default(t_fdf *map)
 		x = -1;
 		while (++x < map->width)
 		{
-			map->matrix[y][x].color = map->matrix[y][x].color_default;	
+			map->matrix[y][x].color = map->matrix[y][x].color_default;
 			map->matrix[y][x].z = map->matrix[y][x].z_default - map->z_shift;
 		}
 	}
@@ -69,7 +69,8 @@ int	main(int argc, char **argv)
 	map->win_ptr = mlx_new_window(map->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, "FDF");
 	map->data->img = mlx_new_image(map->mlx_ptr, SCR_WIDTH, SCR_HEIGHT);
 	map->data->addr = mlx_get_data_addr(map->data->img,
-		&map->data->bits_per_pixel, &map->data->line_length, &map->data->endian);
+			&map->data->bits_per_pixel, &map->data->line_length,
+			&map->data->endian);
 	draw_map(map);
 	mlx_key_hook(map->win_ptr, key_hook, map);
 	mlx_loop(map->mlx_ptr);
@@ -101,7 +102,8 @@ int	main(int argc, char **argv)
 	// 		if (!map->matrix[y][x].x)
 	// 			ft_printf("\n");
 	// 		ft_printf("[%2d |%2d |%2d |%7X] ",
-	// 			map->matrix[y][x].x, map->matrix[y][x].y, map->matrix[y][x].z, map->matrix[y][x].color);
+	// 			map->matrix[y][x].x, map->matrix[y][x].y,
+	// 			map->matrix[y][x].z, map->matrix[y][x].color);
 	// 	}
 	// 	ft_printf("\n\n");
 	// }

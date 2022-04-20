@@ -71,7 +71,7 @@ int	get_color(char *hex, int i)
 	return (hex_num);
 }
 
-void	set_z_min_max(t_fdf *map, int x, int y)
+static void	set_z_min_max(t_fdf *map, int x, int y)
 {
 	if (x == 0 && y == 0)
 	{
@@ -91,9 +91,9 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 
 	num_color = ft_split(str_split[x], ',');
 	if (!num_color)
-		return(error_map_return((void **)num_color, -1));
+		return (error_map_return((void **)num_color, -1));
 	if (array_len(num_color) > 2 || check_digit(num_color[0]))
-		return(error_map_return((void **)num_color, 1));
+		return (error_map_return((void **)num_color, 1));
 	map->matrix[y][x].x = x - map->width / 2;
 	map->matrix[y][x].y = y - map->height / 2;
 	map->matrix[y][x].z = ft_atoi(num_color[0]);
@@ -103,7 +103,7 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 	{
 		map->matrix[y][x].color = get_color(num_color[1], 0);
 		if (map->matrix[y][x].color == -1)
-			return(error_map_return((void **)num_color, 1));
+			return (error_map_return((void **)num_color, 1));
 	}
 	else
 		map->matrix[y][x].color = 0XFFFFFF;

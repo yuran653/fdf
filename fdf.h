@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 12:59:02 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:28:50 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_point
 	int		color_default;
 }	t_point;
 
-typedef struct	s_data {
+typedef struct s_data {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -81,18 +81,16 @@ typedef struct s_fdf
 
 t_fdf	*validation(char *argv);
 void	valid_file_name(char *argv);
-char	*get_height(t_fdf *map, int fd);
-void	get_width(t_fdf *map, char *map_str);
-void	get_values(t_fdf *map, char **map_split, char **str_split, int height);
 int		fill_values(t_fdf *map, char **str_split, int x, int y);
-int		get_color(char *hex, int i);
 int		array_len(char **array);
 int		ft_min(int a, int b);
 int		ft_max(int a, int b);
 float	ft_abs(float a);
 float	abs_max(float a, float b);
-int		check_digit(char *arg);
-int		check_hex(char hex, char *base);
+void	draw_map(t_fdf *map);
+void	set_default(t_fdf *map);
+int		key_hook(int keycode, t_fdf *map);
+void	check_leak(void);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);
 void	free_map(t_fdf *map);
@@ -105,12 +103,6 @@ void	error_common(void);
 void	error_map(void);
 int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
-
-void	draw_map(t_fdf *map);
-void	set_default(t_fdf *map);
-int		key_hook(int keycode, t_fdf *map);
 void	error_free_map_win_exit(t_fdf *map, int err);
-
-void	check_leak(void);
 
 #endif

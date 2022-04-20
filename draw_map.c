@@ -6,13 +6,13 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 12:56:47 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:12:20 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+static void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	bresenham(t_point point, t_point point1, t_fdf *map)
+static void	bresenham(t_point point, t_point point1, t_fdf *map)
 {
 	t_steps	steps;
 
@@ -48,7 +48,7 @@ t_point	set_values(t_point point, t_fdf *map)
 	return (point);
 }
 
-void	set_color_draw_line(t_fdf *map, int clr_opt,
+static void	set_color_draw_line(t_fdf *map, int clr_opt,
 	t_point *point, t_point *point1)
 {
 	if (clr_opt == 1)

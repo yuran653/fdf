@@ -6,39 +6,13 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 13:12:28 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:13:15 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// void	set_new_z_value(t_fdf *map, int diff)
-// {
-// 	int	x;
-// 	int	y;
-
-// 	y = -1;
-// 	while (++y < map->height)
-// 	{
-// 		x = -1;
-// 		while (++x < map->width)
-// 		{
-// 			if (map->matrix[y][x].z > 0)
-// 				map->matrix[y][x].z += diff;
-// 			if (map->matrix[y][x].z < 0)
-// 				map->matrix[y][x].z -= diff;
-// 			if (!map->matrix[y][x].z)
-// 			{
-// 				if (map->matrix[y][x].z_default > 0 && diff > 0)
-// 					map->matrix[y][x].z += diff;
-// 				if (map->matrix[y][x].z_default < 0 && diff < 0)
-// 					map->matrix[y][x].z += diff;
-// 			}
-// 		}
-// 	}
-// }
-
-void	set_new_z_value(t_fdf *map, int diff)
+static void	set_new_z_value(t_fdf *map, int diff)
 {
 	int	x;
 	int	y;
@@ -53,22 +27,11 @@ void	set_new_z_value(t_fdf *map, int diff)
 				map->matrix[y][x].z *= 1.049999;
 			if (diff == -1)
 				map->matrix[y][x].z /= 1.049999;
-			// if (map->matrix[y][x].z > 0)
-			// 	map->matrix[y][x].z += diff;
-			// if (map->matrix[y][x].z < 0)
-			// 	map->matrix[y][x].z -= diff;
-			// if (!map->matrix[y][x].z)
-			// {
-			// 	if (map->matrix[y][x].z_default > 0 && diff > 0)
-			// 		map->matrix[y][x].z += diff;
-			// 	if (map->matrix[y][x].z_default < 0 && diff < 0)
-			// 		map->matrix[y][x].z += diff;
-			// }
 		}
 	}
 }
 
-void	set_new_image(t_fdf *map)
+static	void	set_new_image(t_fdf *map)
 {
 	mlx_destroy_image(map->mlx_ptr, map->data->img);
 	mlx_clear_window(map->mlx_ptr, map->win_ptr);
@@ -100,7 +63,7 @@ int	key_hook(int keycode, t_fdf *map)
 		set_new_z_value(map, 1);
 	else if (keycode == 121)
 		set_new_z_value(map, -1);
-		else if (keycode == 7)
+	else if (keycode == 7)
 		map->clr_opt = 1;
 	else if (keycode == 8)
 		map->clr_opt = 3;

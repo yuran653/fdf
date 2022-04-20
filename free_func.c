@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 02:39:55 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/16 02:00:40 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 14:14:09 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,14 @@ void	free_map(t_fdf *map)
 	map->data = NULL;
 	free(map);
 	map = NULL;
+}
+
+void	error_free_map_win_exit(t_fdf *map, int err)
+{
+	mlx_destroy_image(map->mlx_ptr, map->data->img);
+	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	free_map(map);
+	if (!err)
+		exit(EXIT_SUCCESS);
+	error_common();
 }
