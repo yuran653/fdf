@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 18:06:59 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 13:12:28 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,21 @@ void	set_new_z_value(t_fdf *map, int diff)
 		x = -1;
 		while (++x < map->width)
 		{
-			if (map->matrix[y][x].z > 0)
-				map->matrix[y][x].z += diff;
-			if (map->matrix[y][x].z < 0)
-				map->matrix[y][x].z -= diff;
-			if (!map->matrix[y][x].z)
-			{
-				if (map->matrix[y][x].z_default > 0 && diff > 0)
-					map->matrix[y][x].z += diff;
-				if (map->matrix[y][x].z_default < 0 && diff < 0)
-					map->matrix[y][x].z += diff;
-			}
+			if (diff == 1)
+				map->matrix[y][x].z *= 1.049999;
+			if (diff == -1)
+				map->matrix[y][x].z /= 1.049999;
+			// if (map->matrix[y][x].z > 0)
+			// 	map->matrix[y][x].z += diff;
+			// if (map->matrix[y][x].z < 0)
+			// 	map->matrix[y][x].z -= diff;
+			// if (!map->matrix[y][x].z)
+			// {
+			// 	if (map->matrix[y][x].z_default > 0 && diff > 0)
+			// 		map->matrix[y][x].z += diff;
+			// 	if (map->matrix[y][x].z_default < 0 && diff < 0)
+			// 		map->matrix[y][x].z += diff;
+			// }
 		}
 	}
 }
@@ -96,7 +100,7 @@ int	key_hook(int keycode, t_fdf *map)
 		set_new_z_value(map, 1);
 	else if (keycode == 121)
 		set_new_z_value(map, -1);
-	else if (keycode == 7)
+		else if (keycode == 7)
 		map->clr_opt = 1;
 	else if (keycode == 8)
 		map->clr_opt = 3;

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 19:30:21 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:59:02 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # endif
 
 # ifndef SCR_WIDTH
-#  define SCR_WIDTH 1200
+#  define SCR_WIDTH 1920
 # endif
 
 # ifndef SCR_HEIGHT
-#  define SCR_HEIGHT 1200
+#  define SCR_HEIGHT 1280
 # endif
 
 typedef struct s_steps
@@ -48,7 +48,7 @@ typedef struct s_point
 	float	x;
 	float	y;
 	float	z;
-	int		z_default;
+	float	z_default;
 	int		color;
 	int		color_default;
 }	t_point;
@@ -59,8 +59,6 @@ typedef struct	s_data {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int		non_print;
-	int		print;
 }	t_data;
 
 typedef struct s_fdf
@@ -110,7 +108,6 @@ void	error_file(char *file_name, int fd);
 
 void	draw_map(t_fdf *map);
 void	set_default(t_fdf *map);
-void	set_color(t_point *point, t_point *point1, int clr_opt);
 int		key_hook(int keycode, t_fdf *map);
 void	error_free_map_win_exit(t_fdf *map, int err);
 

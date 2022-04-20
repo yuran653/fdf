@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 18:02:03 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/20 12:59:29 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	main(int argc, char **argv)
 	set_default(map);
 	map->mlx_ptr = mlx_init();
 	map->win_ptr = mlx_new_window(map->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, "FDF");
-	map->data->print = 0;
-	map->data->non_print = 0;
 	map->data->img = mlx_new_image(map->mlx_ptr, SCR_WIDTH, SCR_HEIGHT);
 	map->data->addr = mlx_get_data_addr(map->data->img,
 		&map->data->bits_per_pixel, &map->data->line_length, &map->data->endian);
