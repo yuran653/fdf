@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 20:35:21 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/21 21:44:25 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 # endif
 
 # ifndef SCR_WIDTH
-#  define SCR_WIDTH 1920
+#  define SCR_WIDTH 500//1920
 # endif
 
 # ifndef SCR_HEIGHT
-#  define SCR_HEIGHT 1280
+#  define SCR_HEIGHT 500//1280
 # endif
 
 typedef enum s_project
