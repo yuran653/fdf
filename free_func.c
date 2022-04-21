@@ -6,11 +6,16 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 02:39:55 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 14:14:09 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:30:49 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	check_leak(void)
+{
+	exit(EXIT_SUCCESS);
+}
 
 void	free_array(void **array)
 {
@@ -36,6 +41,9 @@ void	free_map(t_fdf *map)
 	if (map->data)
 		free(map->data);
 	map->data = NULL;
+	if (map->rotate)
+		free(map->rotate);
+	map->rotate = NULL;
 	free(map);
 	map = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 20:38:58 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:35:21 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@
 #  define SCR_HEIGHT 1280
 # endif
 
+typedef enum s_project
+{
+	ISO,
+	PARALLEL	
+}	t_project;
+
+typedef enum s_color
+{
+	DEFAULT,
+	RGB
+}	t_color;
+
 typedef struct s_steps
 {
 	double	x_step;
@@ -57,6 +69,13 @@ typedef struct s_point
 	int		color_default;
 }	t_point;
 
+typedef struct s_rotate
+{
+	double	alpha;
+	double	beta;
+	double	gamma;
+}	t_rotate;
+
 typedef struct s_data {
 	void	*img;
 	char	*addr;
@@ -67,22 +86,25 @@ typedef struct s_data {
 
 typedef struct s_fdf
 {
-	t_point	**matrix;
-	int		width;
-	int		height;
-	int		clr_opt;
-	int		x_shift;
-	int		y_shift;
-	double	z_shift;
-	double	z_zoom;
-	double	zoom;
-	double	z_min;
-	double	z_max;
-	double	angle;
-	double	rotate_smpl;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_data	*data;
+	t_point		**matrix;
+	t_point		tmp;
+	t_project	projection;
+	t_color		color;
+	int			width;
+	int			height;
+	int			x_shift;
+	int			y_shift;
+	double		z_shift;
+	double		z_zoom;
+	double		zoom;
+	double		z_min;
+	double		z_max;
+	double		angle;
+	double		angle_default;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_data		*data;
+	t_rotate	*rotate;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);
@@ -95,7 +117,10 @@ double	ft_abs(double a);
 double	abs_max(double a, double b);
 void	draw_map(t_fdf *map);
 void	set_default(t_fdf *map);
+void	set_projection(int keycode, t_fdf *map);
+void	set_rotate_value(int keycode, t_fdf *map);
 void	rotate_simple(int keycode, t_fdf *map);
+void	rotate_abscissa(t_point *point, t_fdf *map);
 int		key_hook(int keycode, t_fdf *map);
 void	check_leak(void);
 void	free_array(void **array);

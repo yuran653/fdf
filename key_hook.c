@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 20:21:17 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:45:24 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void	translate(int keycode, t_fdf *map)
 static void	color_zoom(int keycode, t_fdf *map)
 {
 	if (keycode == 7)
-		map->clr_opt = 1;
+		map->color = DEFAULT;
 	else if (keycode == 8)
-		map->clr_opt = 3;
+		map->color = RGB;
 	else if (keycode == 69 && map->zoom < 2000)
 		map->zoom *= 1.029999999999999;
-	else if (keycode == 78 && map->zoom > 1.03 && map->zoom < 2000)
+	else if (keycode == 78 && map->zoom > 1.03)
 		map->zoom /= 1.029999999999999;
 }
 
@@ -82,14 +82,19 @@ int	key_hook(int keycode, t_fdf *map)
 		error_free_map_win_exit(map, EXIT_SUCCESS);
 	else if (keycode == 4)
 		set_default(map);
-	else if (keycode == 7 || keycode == 8 || keycode == 69 || keycode == 78)
+	else if (keycode == 6 || keycode == 7 || keycode == 8
+		|| keycode == 69 || keycode == 78)
 		color_zoom(keycode, map);
 	else if (keycode >= 123 && keycode <= 126)
 		translate(keycode, map);
 	else if (keycode == 116 || keycode == 121)
 		stretch_compress(keycode, map);
-	else if (keycode == 12 || keycode == 14)
+	else if ((keycode == 12 || keycode == 14) && map->projection == PARALLEL)
 		rotate_simple(keycode, map);
+	else if ((keycode == 0 || keycode == 2) && map->projection == ISO)
+		set_rotate_value(keycode, map);
+	else if (keycode == 34 || keycode == 35)
+		set_projection(keycode, map);
 	else
 	{
 		ft_printf("keycode = [%d]\n", keycode);
@@ -110,5 +115,10 @@ int	key_hook(int keycode, t_fdf *map)
 // pgdn -> 121
 // c -> 8
 // x -> 7
+// z -> 6
 // e -> 14
 // q -> 12
+// i -> 34
+// p -> 35
+// a -> 0
+// d -> 2

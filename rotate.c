@@ -6,24 +6,58 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:20:04 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/20 20:50:03 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/21 20:47:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+void	set_rotate_value(int keycode, t_fdf *map)
+{
+	if (keycode == 0)
+		map->rotate->alpha -= 0.025;
+	else if (keycode == 2)
+		map->rotate->alpha += 0.025;
+}
+
+void	set_projection(int keycode, t_fdf *map)
+{
+	if (keycode == 34)
+	{
+		if (map->projection != ISO)
+			map->angle_default = 0.175;
+		map->projection = ISO;
+	}
+	else if (keycode == 35)
+	{
+		if (map->projection != PARALLEL)
+			map->angle_default = 0;
+		map->projection = PARALLEL;
+	}
+	map->angle = M_PI * map->angle_default;
+}
+
 void	rotate_simple(int keycode, t_fdf *map)
 {
-	if (keycode == 14)
+	
+	if (keycode == 12)
 	{
-		if (map->rotate_smpl < 2)
-			map->rotate_smpl += 0.025;
+		if (map->angle_default > 0.025)
+			map->angle_default -= 0.025;
 		else
-			map->rotate_smpl = 0.025;
+			map->angle_default = 2;
 	}
-	map->angle = M_PI * map->rotate_smpl;
-	printf("KEY = %d | ANGLE = %f | PI = %f\n", keycode, map->angle, M_PI);
+	else if (keycode == 14)
+	{
+		if (map->angle_default < 2)
+			map->angle_default += 0.025;
+		else
+			map->angle_default = 0.025;
+	}
+	map->angle = M_PI * map->angle_default;
 }
 
 // e -> 14
 // q -> 12
+// a -> 0
+// d -> 2
