@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 20:45:24 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:47:09 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 static void	translate(int keycode, t_fdf *map)
 {
-	if (keycode == 123 && map->x_shift > -(SCR_WIDTH + SCR_WIDTH / 2))
+	if (keycode == ARROW_LEFT
+		&& map->x_shift > -(SCR_WIDTH + SCR_WIDTH / 2))
 		map->x_shift -= 5;
-	else if (keycode == 124 && map->x_shift < (SCR_WIDTH + SCR_WIDTH / 2))
+	else if (keycode == ARROW_RIGHT
+		&& map->x_shift < (SCR_WIDTH + SCR_WIDTH / 2))
 		map->x_shift += 5;
-	else if (keycode == 125 && map->y_shift < (SCR_HEIGHT + SCR_HEIGHT / 2))
+	else if (keycode == ARROW_DOWN
+		&& map->y_shift < (SCR_HEIGHT + SCR_HEIGHT / 2))
 		map->y_shift += 5;
-	else if (keycode == 126 && map->y_shift > -(SCR_HEIGHT + SCR_HEIGHT / 2))
+	else if (keycode == ARROW_UP
+		&& map->y_shift > -(SCR_HEIGHT + SCR_HEIGHT / 2))
 		map->y_shift -= 5;
 }
 
 static void	color_zoom(int keycode, t_fdf *map)
 {
-	if (keycode == 7)
+	if (keycode == COLOR_DEFAULT)
 		map->color = DEFAULT;
-	else if (keycode == 8)
+	else if (keycode == COLOR_RGB)
 		map->color = RGB;
 	else if (keycode == 69 && map->zoom < 2000)
 		map->zoom *= 1.029999999999999;
@@ -78,22 +82,25 @@ static	void	set_new_image(t_fdf *map)
 
 int	key_hook(int keycode, t_fdf *map)
 {
-	if (keycode == 53)
+	if (keycode == ESCAPE)
 		error_free_map_win_exit(map, EXIT_SUCCESS);
-	else if (keycode == 4)
+	else if (keycode == SET_DEFAULT)
 		set_default(map);
-	else if (keycode == 6 || keycode == 7 || keycode == 8
-		|| keycode == 69 || keycode == 78)
+	else if (keycode == COLOR_DEFAULT || keycode == COLOR_RGB
+		|| keycode == ZOOM_PLUS || keycode == ZOOM_MINUS)
 		color_zoom(keycode, map);
-	else if (keycode >= 123 && keycode <= 126)
+	else if (keycode == ARROW_LEFT || keycode == ARROW_RIGHT
+		|| keycode == ARROW_DOWN || keycode == ARROW_UP)
 		translate(keycode, map);
-	else if (keycode == 116 || keycode == 121)
+	else if (keycode == STRETCH || keycode == COMPRESS)
 		stretch_compress(keycode, map);
-	else if ((keycode == 12 || keycode == 14) && map->projection == PARALLEL)
-		rotate_simple(keycode, map);
-	else if ((keycode == 0 || keycode == 2) && map->projection == ISO)
-		set_rotate_value(keycode, map);
-	else if (keycode == 34 || keycode == 35)
+	else if ((keycode == CNTRCLOCK_ALT || keycode == CLOCKWISE_ALT)
+		&& map->projection == PARALLEL)
+		make_rotate(keycode, map);
+	else if ((keycode == CNTRCLOCK_ABS || keycode == CLOCKWISE_ABS)
+		&& map->projection == ISO)
+		make_rotate(keycode, map);
+	else if (keycode == PROJ_ISOMETRIC || keycode == PROJ_PARALLEL)
 		set_projection(keycode, map);
 	else
 	{
@@ -104,6 +111,7 @@ int	key_hook(int keycode, t_fdf *map)
 	return (0);
 }
 
+// esc -> 53
 // h -> 4
 // + -> 69
 // - -> 78
@@ -122,3 +130,15 @@ int	key_hook(int keycode, t_fdf *map)
 // p -> 35
 // a -> 0
 // d -> 2
+// w -> 13
+// s -> 1
+
+// else if (keycode == 6 || keycode == 7 || keycode == 8
+// 		|| keycode == 69 || keycode == 78)
+
+	// else if ((keycode == CNTRCLOCKWISE_ALT || keycode == CLOCKWISE_ALT)
+	// 	&& map->projection == PARALLEL)
+	// 	rotate_simple(keycode, map);
+	// else if ((keycode == CNTRCLOCKWISE_ALT || keycode == CLOCKWISE_ALT)
+	// 	&& map->projection == ISO)
+	// 	rotate_isometric(keycode, map);

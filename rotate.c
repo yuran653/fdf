@@ -6,20 +6,41 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:20:04 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 22:28:12 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:46:07 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	set_rotate_value(int keycode, t_fdf *map)
+static void	rotate_values(t_direct value, double *angle, double *angle_rotate)
 {
-	if (keycode == 0)
-		map->rotate->alpha -= 0.025;//0.025;
-	else if (keycode == 2)
-		map->rotate->alpha += 0.025;//0.025;
-	printf("ALPHA = %f | COS(ALPHA) = %f | SIN(ALPHA) = %f\n",
-		map->rotate->alpha, cos(map->rotate->alpha), sin(map->rotate->alpha));
+	if (value == CNTRCLOCK)
+	{
+		if (*angle_rotate > 0.025)
+			*angle_rotate -= 0.025;
+		else
+			*angle_rotate = 2;
+	}
+	else if (value == CLOCKWISE)
+	{
+		if (*angle_rotate < 1.975)
+			*angle_rotate += 0.025;
+		else
+			*angle_rotate = 0.025;
+	}
+	*angle = M_PI * *angle_rotate;
+}
+
+void	make_rotate(int keycode, t_fdf *map)
+{
+	if (keycode == CLOCKWISE_ABS)
+		rotate_values(CLOCKWISE, &map->rotate->alpha, &map->rotate->alpha_rt);
+	else if (keycode == CNTRCLOCK_ABS)
+		rotate_values(CNTRCLOCK, &map->rotate->alpha, &map->rotate->alpha_rt);
+	else if (keycode == CLOCKWISE_ALT)
+		rotate_values(CLOCKWISE, &map->angle, &map->angle_rt);
+	else if (keycode == CNTRCLOCK_ALT)
+		rotate_values(CNTRCLOCK, &map->angle, &map->angle_rt);
 }
 
 void	set_projection(int keycode, t_fdf *map)
@@ -27,39 +48,27 @@ void	set_projection(int keycode, t_fdf *map)
 	if (keycode == 34)
 	{
 		if (map->projection != ISO)
-			map->angle_default = 0.175;
+			map->angle_rt = 0.175;
 		map->projection = ISO;
 	}
 	else if (keycode == 35)
 	{
 		if (map->projection != PARALLEL)
-			map->angle_default = 0;
+			map->angle_rt = 0;
 		map->projection = PARALLEL;
 	}
-	map->angle = M_PI * map->angle_default;
-}
-
-void	rotate_simple(int keycode, t_fdf *map)
-{
-	
-	if (keycode == 12)
-	{
-		if (map->angle_default > 0.025)
-			map->angle_default -= 0.025;
-		else
-			map->angle_default = 2;
-	}
-	else if (keycode == 14)
-	{
-		if (map->angle_default < 2)
-			map->angle_default += 0.025;
-		else
-			map->angle_default = 0.025;
-	}
-	map->angle = M_PI * map->angle_default;
+	map->angle = M_PI * map->angle_rt;
 }
 
 // e -> 14
 // q -> 12
 // a -> 0
 // d -> 2
+
+// printf("ALPHA = %f | ROTATE = %f | COS(ALPHA) = %f | SIN(ALPHA) = %f\n",
+// 		map->rotate->alpha, map->rotate->alpha_rotate,
+// 		cos(map->rotate->alpha), sin(map->rotate->alpha));
+
+// printf("ANGLE = %f | ROTATE = %f | COS(ALPHA) = %f | SIN(ALPHA) = %f\n",
+// 		map->angle, map->angle_rotate,
+// 		cos(map->angle), sin(map->angle));

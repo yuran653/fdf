@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 21:44:25 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 15:56:53 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 # include "./get_next_line/get_next_line.h"
+# include "keys_define.h"
 # include <mlx.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -33,11 +34,11 @@
 # endif
 
 # ifndef SCR_WIDTH
-#  define SCR_WIDTH 500//1920
+#  define SCR_WIDTH 1920
 # endif
 
 # ifndef SCR_HEIGHT
-#  define SCR_HEIGHT 500//1280
+#  define SCR_HEIGHT 1280
 # endif
 
 typedef enum s_project
@@ -51,6 +52,12 @@ typedef enum s_color
 	DEFAULT,
 	RGB
 }	t_color;
+
+typedef enum s_direct
+{
+	CLOCKWISE,
+	CNTRCLOCK
+}	t_direct;
 
 typedef struct s_steps
 {
@@ -72,8 +79,11 @@ typedef struct s_point
 typedef struct s_rotate
 {
 	double	alpha;
+	double	alpha_rt;
 	double	beta;
+	double	beta_rt;
 	double	gamma;
+	double	gamma_rt;
 }	t_rotate;
 
 typedef struct s_data {
@@ -100,7 +110,7 @@ typedef struct s_fdf
 	double		z_min;
 	double		z_max;
 	double		angle;
-	double		angle_default;
+	double		angle_rt;
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_data		*data;
@@ -116,12 +126,11 @@ double	ft_max(double a, double b);
 double	ft_abs(double a);
 double	abs_max(double a, double b);
 void	draw_map(t_fdf *map);
+int		key_hook(int keycode, t_fdf *map);
 void	set_default(t_fdf *map);
 void	set_projection(int keycode, t_fdf *map);
-void	set_rotate_value(int keycode, t_fdf *map);
-void	rotate_simple(int keycode, t_fdf *map);
+void	make_rotate(int keycode, t_fdf *map);
 void	rotate_abscissa(t_point *point, t_fdf *map);
-int		key_hook(int keycode, t_fdf *map);
 void	check_leak(void);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);

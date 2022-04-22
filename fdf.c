@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 20:34:32 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:13:20 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static void	set_default_zoom_rotate(t_fdf *map)
 	map->zoom = ft_max(map->zoom, map->z_zoom);
 	map->zoom = (ft_min(SCR_WIDTH, SCR_HEIGHT)) / 3.75 / map->zoom;
 	map->rotate->alpha = 0;
+	map->rotate->alpha_rt = 0;
 	map->rotate->beta = 0;
+	map->rotate->beta_rt = 0;
 	map->rotate->gamma = 0;
+	map->rotate->gamma_rt = 0;
 }
 
 static void	set_z_shift_zoom(t_fdf *map)
@@ -46,8 +49,8 @@ void	set_default(t_fdf *map)
 	int	x;
 	int	y;
 
-	map->angle_default = 0.175;
-	map->angle = M_PI * map->angle_default;
+	map->angle_rt = 0.175;
+	map->angle = M_PI * map->angle_rt;
 	map->projection = ISO;
 	set_z_shift_zoom(map);
 	y = -1;
@@ -89,7 +92,7 @@ int	main(int argc, char **argv)
 			&map->data->bits_per_pixel, &map->data->line_length,
 			&map->data->endian);
 	draw_map(map);
-	mlx_key_hook(map->win_ptr, key_hook, map);
+	mlx_hook(map->win_ptr, 2, 0L, key_hook, map);
 	mlx_loop(map->mlx_ptr);
 	free_map(map);
 	return (0);
