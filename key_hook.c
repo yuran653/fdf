@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 15:47:09 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:58:22 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,16 +97,13 @@ int	key_hook(int keycode, t_fdf *map)
 	else if ((keycode == CNTRCLOCK_ALT || keycode == CLOCKWISE_ALT)
 		&& map->projection == PARALLEL)
 		make_rotate(keycode, map);
-	else if ((keycode == CNTRCLOCK_ABS || keycode == CLOCKWISE_ABS)
+	else if ((keycode == CNTRCLOCK_ABS || keycode == CLOCKWISE_ABS
+			|| keycode == CNTRCLOCK_ORD || keycode == CLOCKWISE_ORD
+			|| keycode == CNTRCLOCK_ALT || keycode == CLOCKWISE_ALT)
 		&& map->projection == ISO)
 		make_rotate(keycode, map);
 	else if (keycode == PROJ_ISOMETRIC || keycode == PROJ_PARALLEL)
 		set_projection(keycode, map);
-	else
-	{
-		ft_printf("keycode = [%d]\n", keycode);
-		return (0);
-	}
 	set_new_image(map);
 	return (0);
 }
@@ -133,8 +130,8 @@ int	key_hook(int keycode, t_fdf *map)
 // w -> 13
 // s -> 1
 
-// else if (keycode == 6 || keycode == 7 || keycode == 8
-// 		|| keycode == 69 || keycode == 78)
+	// else if (keycode == 6 || keycode == 7 || keycode == 8
+	// 		|| keycode == 69 || keycode == 78)
 
 	// else if ((keycode == CNTRCLOCKWISE_ALT || keycode == CLOCKWISE_ALT)
 	// 	&& map->projection == PARALLEL)
@@ -142,3 +139,9 @@ int	key_hook(int keycode, t_fdf *map)
 	// else if ((keycode == CNTRCLOCKWISE_ALT || keycode == CLOCKWISE_ALT)
 	// 	&& map->projection == ISO)
 	// 	rotate_isometric(keycode, map);
+
+	// else
+	// {
+	// 	ft_printf("keycode = [%d]\n", keycode);
+	// 	return (0);
+	// }

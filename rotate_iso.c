@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 20:28:00 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 16:08:19 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:49:18 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,20 @@ void	rotate_abscissa(t_point *point, t_fdf *map)
 	point->y = map->tmp.y;
 }
 
-// void	rotate_ordinate(t_point *point, t_fdf *map)
-// {
-// 	map->tmp.x = point->x * cos(map->rotate->beta) + point->z
-// 		* sin(map->rotate->beta);
-// 	point->z = -point->x * sin(map->rotate->beta) + point->z
-// 		* cos(map->rotate->beta);
-// 	point->x = map->tmp.x;
-// }
+void	rotate_ordinate(t_point *point, t_fdf *map)
+{
+	map->tmp.x = point->x * cos(map->rotate->beta) + point->z
+		* sin(map->rotate->beta);
+	point->z = -point->x * sin(map->rotate->beta) + point->z
+		* cos(map->rotate->beta);
+	point->x = map->tmp.x;
+}
+
+void	rotate_altitude(t_point *point, t_fdf *map)
+{
+	map->tmp.x = point->x * cos(map->rotate->gamma)
+		- point->y * sin(map->rotate->gamma);
+	point->y = point->x * sin(map->rotate->gamma)
+		+ point->y * cos(map->rotate->gamma);
+	point->x = map->tmp.x;
+}

@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 16:08:34 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 17:27:18 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	bresenham(t_point point, t_point point1, t_fdf *map)
 t_point	set_values(t_point point, t_fdf *map)
 {
 	rotate_abscissa(&point, map);
-	// rotate_ordinate(&point, map);
+	rotate_ordinate(&point, map);
+	rotate_altitude(&point, map);
 	if (map->projection == ISO)
 	{
 		map->tmp.x = (point.x * map->zoom - point.y * map->zoom)
@@ -112,3 +113,9 @@ void	draw_map(t_fdf *map)
 //	* cos(map->angle) + map->x_shift;
 // point.y = (point.x - map->x_shift + point.y * map->zoom)
 // 	* sin(map->angle) - point.z * map->zoom + map->y_shift;
+
+		// point->color = 0XCC0000;
+		// if (point->z_default == 0 && point1->z_default == 0)
+		// 	point->color = 0X0000CC;
+		// if (point->z_default > 0 || point1->z_default > 0)
+		// 	point->color = 0X00CC00;

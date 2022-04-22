@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:20:04 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 15:46:07 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 16:53:04 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,17 @@ void	make_rotate(int keycode, t_fdf *map)
 		rotate_values(CLOCKWISE, &map->rotate->alpha, &map->rotate->alpha_rt);
 	else if (keycode == CNTRCLOCK_ABS)
 		rotate_values(CNTRCLOCK, &map->rotate->alpha, &map->rotate->alpha_rt);
-	else if (keycode == CLOCKWISE_ALT)
+	else if (keycode == CLOCKWISE_ORD)
+		rotate_values(CLOCKWISE, &map->rotate->beta, &map->rotate->beta_rt);
+	else if (keycode == CNTRCLOCK_ORD)
+		rotate_values(CNTRCLOCK, &map->rotate->beta, &map->rotate->beta_rt);
+	else if (keycode == CLOCKWISE_ALT && map->projection == ISO)
+		rotate_values(CLOCKWISE, &map->rotate->gamma, &map->rotate->gamma_rt);
+	else if (keycode == CNTRCLOCK_ALT && map->projection == ISO)
+		rotate_values(CNTRCLOCK, &map->rotate->gamma, &map->rotate->gamma_rt);
+	else if (keycode == CLOCKWISE_ALT && map->projection == PARALLEL)
 		rotate_values(CLOCKWISE, &map->angle, &map->angle_rt);
-	else if (keycode == CNTRCLOCK_ALT)
+	else if (keycode == CNTRCLOCK_ALT && map->projection == PARALLEL)
 		rotate_values(CNTRCLOCK, &map->angle, &map->angle_rt);
 }
 
