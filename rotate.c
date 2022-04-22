@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 20:20:04 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 16:53:04 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:05:29 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,30 @@ void	make_rotate(int keycode, t_fdf *map)
 
 void	set_projection(int keycode, t_fdf *map)
 {
-	if (keycode == 34)
+	if (keycode == PROJ_ISOMETRIC)
 	{
 		if (map->projection != ISO)
+		{
+			map->rotate->alpha = map->rotate_save->alpha;
+			map->rotate_save->alpha = 0;
+			map->rotate->beta = map->rotate_save->beta;
+			map->rotate_save->beta = 0;
 			map->angle_rt = 0.175;
+		}
 		map->projection = ISO;
 	}
-	else if (keycode == 35)
+	else if (keycode == PROJ_PARALLEL)
 	{
 		if (map->projection != PARALLEL)
+		{
+			map->rotate_save->alpha = map->rotate->alpha;
+			map->rotate->alpha = 0;
+			map->rotate_save->beta = map->rotate->beta;
+			map->rotate->beta = 0;
 			map->angle_rt = 0;
+		}
 		map->projection = PARALLEL;
 	}
 	map->angle = M_PI * map->angle_rt;
 }
 
-// e -> 14
-// q -> 12
-// a -> 0
-// d -> 2
-
-// printf("ALPHA = %f | ROTATE = %f | COS(ALPHA) = %f | SIN(ALPHA) = %f\n",
-// 		map->rotate->alpha, map->rotate->alpha_rotate,
-// 		cos(map->rotate->alpha), sin(map->rotate->alpha));
-
-// printf("ANGLE = %f | ROTATE = %f | COS(ALPHA) = %f | SIN(ALPHA) = %f\n",
-// 		map->angle, map->angle_rotate,
-// 		cos(map->angle), sin(map->angle));

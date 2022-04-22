@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 16:13:20 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:57:07 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	set_default_zoom_rotate(t_fdf *map)
 	map->rotate->beta_rt = 0;
 	map->rotate->gamma = 0;
 	map->rotate->gamma_rt = 0;
+	map->rotate_save->alpha = 0;
+	map->rotate_save->alpha_rt = 0;
+	map->rotate_save->beta = 0;
+	map->rotate_save->beta_rt = 0;
+	map->rotate_save->gamma = 0;
+	map->rotate_save->gamma_rt = 0;
 }
 
 static void	set_z_shift_zoom(t_fdf *map)
@@ -69,21 +75,30 @@ void	set_default(t_fdf *map)
 	set_default_zoom_rotate(map);
 }
 
-int	main(int argc, char **argv)
+static void	malloc_variables(t_fdf *map)
 {
-	t_fdf	*map;
-
-	map = NULL;
-	if (argc == 2)
-		map = validation(argv[1]);
-	if (!map)
-		return (0);
 	map->data = (t_data *)malloc(sizeof(t_data));
 	if (!map->data)
 		error_free_map_exit(map);
 	map->rotate = (t_rotate *)malloc(sizeof(t_rotate));
 	if (!map->rotate)
 		error_free_map_exit(map);
+	map->rotate_save = (t_rotate *)malloc(sizeof(t_rotate));
+	if (!map->rotate)
+		error_free_map_exit(map);
+}
+
+int	main(int argc, char **argv)
+{
+	t_fdf	*map;
+
+	map = NULL;
+	if (argc != 2)
+		return (0);
+	map = validation(argv[1]);
+	if (!map)
+		return (0);
+	malloc_variables(map);
 	set_default(map);
 	map->mlx_ptr = mlx_init();
 	map->win_ptr = mlx_new_window(map->mlx_ptr, SCR_WIDTH, SCR_HEIGHT, "FDF");

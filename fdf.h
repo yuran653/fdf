@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 16:56:14 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:37:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_fdf
 	void		*win_ptr;
 	t_data		*data;
 	t_rotate	*rotate;
+	t_rotate	*rotate_save;
 }	t_fdf;
 
 t_fdf	*validation(char *argv);

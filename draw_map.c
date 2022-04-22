@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 17:27:18 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 21:05:06 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,17 +105,3 @@ void	draw_map(t_fdf *map)
 	}
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data->img, 0, 0);
 }
-
-// ---------ISOMETRIC---------
-// x = (x - y) * cos(angle);
-// y = (x + y) * sin(angle) - z;
-// point.x = (point.x * map->zoom - point.y * map->zoom)
-//	* cos(map->angle) + map->x_shift;
-// point.y = (point.x - map->x_shift + point.y * map->zoom)
-// 	* sin(map->angle) - point.z * map->zoom + map->y_shift;
-
-		// point->color = 0XCC0000;
-		// if (point->z_default == 0 && point1->z_default == 0)
-		// 	point->color = 0X0000CC;
-		// if (point->z_default > 0 || point1->z_default > 0)
-		// 	point->color = 0X00CC00;

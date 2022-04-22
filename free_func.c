@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 02:39:55 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/21 20:30:49 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:42:35 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	free_map(t_fdf *map)
 	if (map->rotate)
 		free(map->rotate);
 	map->rotate = NULL;
+	if (map->rotate_save)
+		free(map->rotate_save);
+	map->rotate_save = NULL;
 	free(map);
 	map = NULL;
 }

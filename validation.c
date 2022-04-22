@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:06:59 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/19 12:09:09 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/22 20:44:12 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,10 @@ t_fdf	*validation(char *argv)
 		error_common();
 	map->matrix = NULL;
 	map->data = NULL;
+	map->rotate = NULL;
+	map->rotate_save = NULL;
+	map->mlx_ptr = NULL;
+	map->win_ptr = NULL;
 	map_str = get_height(map, fd);
 	if (!map_str)
 		error_free_exit(map);
