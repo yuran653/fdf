@@ -6,7 +6,7 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/23 16:07:20 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/23 19:56:18 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ END			=	"\033[0m"
 
 all			:	libft ft_printf $(NAME)
 
-bonus		:	libft ft_printf $(NAME_B)
+bonus		:	libft ft_printf $(NAME)
 
 libft		:	
 				$(MAKE) -C $(dir $(LIB))

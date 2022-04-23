@@ -106,7 +106,7 @@ int	fill_values(t_fdf *map, char **str_split, int x, int y)
 			return (error_map_return((void **)num_color, 1));
 	}
 	else
-		map->matrix[y][x].color = 0XFFFFFF;
+		map->matrix[y][x].color = COLOR_MAIN;
 	map->matrix[y][x].color_default = map->matrix[y][x].color;
 	free_array((void **)num_color);
 	return (0);

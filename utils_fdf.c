@@ -6,76 +6,81 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 16:09:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 16:59:52 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 19:46:38 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// static void	print_how_to_use_continue(t_fdf *map, int y)
-// {
-	
-// }
+static void	print_how_to_use_other(t_fdf *map, int *y)
+{
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+		"To stretch / compress image:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'Page UP' to stretch");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'Page DOWN' to compress");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+		"To zoom image:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use '+' to increase zoom");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use '-' to decrease zoom");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+		"To change projection t*ype:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'P' to set PARALLEL progection");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'I' to set ISOMETRIC projection");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+		"To change color:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'C' to set RGB color");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'X' to reset color to default");
+}
+
+static void	print_how_to_use_rotate(t_fdf *map, int *y)
+{
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+		"To rotate image:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, *y += 20, COLOR_MAIN,
+		"over ABSCISSA axis:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'D' to rotate clock-wise");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'A' to rotate counterclock-wise");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, *y += 20, COLOR_MAIN,
+		"over ORDINATE axis:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'S' to rotate clock-wise");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'W' to rotate counterclock-wise");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, *y += 20, COLOR_MAIN,
+		"over ALTITUDE axis:");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'E' to rotate clock-wise");
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+		"use 'Q' to rotate counterclock-wise");
+}
 
 void	print_how_to_use(t_fdf *map, int y)
 {
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 10, y += 10, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 10, y += 10, COLOR_MAIN,
 		"HOW TO USE:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, COLOR_MAIN,
 		"To move image:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, COLOR_MAIN,
 		"use arrows UP, DOWN, LEFT, RIGHT");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
-		"To rotate image:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, y += 20, 0XFFFFFF,
-		"over ABSCISSA axis:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'D' to rotate clock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'A' to rotate counterclock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, y += 20, 0XFFFFFF,
-		"over ORDINATE axis:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'S' to rotate clock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'W' to rotate counterclock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 40, y += 20, 0XFFFFFF,
-		"over ALTITUDE axis:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'E' to rotate clock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'Q' to rotate counterclock-wise");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
-		"To stretch / compress image:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'Page UP' to stretch");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'Page DOWN' to compress");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
-		"To zoom image:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use '+' to increase zoom");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use '-' to decrease zoom");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
-		"To change projection type:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'P' to set PARALLEL progection");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'I' to set ISOMETRIC projection");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
-		"To change color:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'C' to set RGB color");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
-		"use 'X' to reset color to default");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
+	print_how_to_use_rotate(map, &y);
+	print_how_to_use_other(map, &y);
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, COLOR_MAIN,
 		"Reset to default:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, COLOR_MAIN,
 		"use 'H' to reset image to default");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, y += 40, COLOR_MAIN,
 		"Exit:");
-	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, 0XFFFFFF,
+	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, y += 20, COLOR_MAIN,
 		"use 'ESC' to exit");
 }
 

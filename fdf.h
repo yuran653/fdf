@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 16:52:22 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 19:54:51 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 
 # ifndef SCR_HEIGHT
 #  define SCR_HEIGHT 1280
+# endif
+
+# ifndef COLOR_MAIN
+#  define COLOR_MAIN 0XDADADA
 # endif
 
 typedef enum s_project

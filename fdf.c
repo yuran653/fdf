@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 20:57:07 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 19:45:45 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	set_default(t_fdf *map)
 			map->matrix[y][x].z = map->matrix[y][x].z_default - map->z_shift;
 		}
 	}
-	map->x_shift = SCR_WIDTH / 2;
+	map->x_shift = SCR_WIDTH / 2 + 150;
 	map->y_shift = SCR_HEIGHT / 2;
 	map->color = DEFAULT;
 	set_default_zoom_rotate(map);
