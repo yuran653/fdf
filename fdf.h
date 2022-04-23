@@ -6,12 +6,15 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 20:37:11 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 16:52:22 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+
+# define _USE_MATH_DEFINES
+# define BASE16 "0123456789ABCDEF"
 
 # include "./libft/libft.h"
 # include "./ft_printf/ft_printf.h"
@@ -24,14 +27,6 @@
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
-
-# ifndef _USE_MATH_DEFINES
-#  define _USE_MATH_DEFINES
-# endif
-
-# ifndef BASE16
-#  define BASE16 "0123456789ABCDEF"
-# endif
 
 # ifndef SCR_WIDTH
 #  define SCR_WIDTH 1920
@@ -134,6 +129,7 @@ void	make_rotate(int keycode, t_fdf *map);
 void	rotate_abscissa(t_point *point, t_fdf *map);
 void	rotate_ordinate(t_point *point, t_fdf *map);
 void	rotate_altitude(t_point *point, t_fdf *map);
+void	print_how_to_use(t_fdf *map, int y);
 void	check_leak(void);
 void	free_array(void **array);
 void	free_array_2(void **array1, void **array2);

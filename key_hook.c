@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 21:05:22 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 14:22:12 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ static void	stretch_compress(int keycode, t_fdf *map)
 		x = -1;
 		while (++x < map->width)
 		{
-			if (keycode == 116)
+			if (keycode == STRETCH)
 			{
 				if (ft_abs(map->matrix[y][x].z) > 1)
 					map->matrix[y][x].z *= 1.049999999999999;
 				else
 					map->matrix[y][x].z *= 1.149999999999999;
 			}
-			if (keycode == 121)
+			if (keycode == COMPRESS)
 			{
 				if (ft_abs(map->matrix[y][x].z) > 1)
 					map->matrix[y][x].z /= 1.049999999999999;

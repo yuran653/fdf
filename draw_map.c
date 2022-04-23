@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 21:05:06 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/23 16:52:09 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	bresenham(t_point point, t_point point1, t_fdf *map)
 	}
 }
 
-t_point	set_values(t_point point, t_fdf *map)
+static t_point	set_values(t_point point, t_fdf *map)
 {
 	rotate_abscissa(&point, map);
 	rotate_ordinate(&point, map);
@@ -104,4 +104,5 @@ void	draw_map(t_fdf *map)
 		}
 	}
 	mlx_put_image_to_window(map->mlx_ptr, map->win_ptr, map->data->img, 0, 0);
+	print_how_to_use(map, 0);
 }
