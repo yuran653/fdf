@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 19:54:51 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/24 00:26:30 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@
 # include <string.h>
 # include <unistd.h>
 
-# ifndef SCR_WIDTH
-#  define SCR_WIDTH 1920
-# endif
+# define R_MASK		0xFF0000
+# define R_SHIFT	16
+# define G_MASK		0x00FF00
+# define G_SHIFT	8
+# define B_MASK		0x0000FF
+# define B_SHIFT	0
+# define COLOR_MAIN 0XDADADA
 
-# ifndef SCR_HEIGHT
-#  define SCR_HEIGHT 1280
-# endif
-
-# ifndef COLOR_MAIN
-#  define COLOR_MAIN 0XDADADA
-# endif
+# define SCR_WIDTH	1920
+# define SCR_HEIGHT 1280
 
 typedef enum s_project
 {
@@ -63,6 +62,7 @@ typedef struct s_steps
 	double	x_step;
 	double	y_step;
 	int		max;
+	int		i;
 }	t_steps;
 
 typedef struct s_point
@@ -129,6 +129,8 @@ void	draw_map(t_fdf *map);
 int		key_hook(int keycode, t_fdf *map);
 void	set_default(t_fdf *map);
 void	set_projection(int keycode, t_fdf *map);
+void	set_color(t_point *point, t_fdf *map);
+int		get_gradient(int start, int end, int len, int i);
 void	make_rotate(int keycode, t_fdf *map);
 void	rotate_abscissa(t_point *point, t_fdf *map);
 void	rotate_ordinate(t_point *point, t_fdf *map);

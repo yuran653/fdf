@@ -6,15 +6,15 @@
 #    By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 16:35:06 by jgoldste          #+#    #+#              #
-#    Updated: 2022/04/23 19:56:18 by jgoldste         ###   ########.fr        #
+#    Updated: 2022/04/23 22:01:32 by jgoldste         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	fdf
 
 SRCS		=	fdf.c			validation.c		get_map.c\
-				draw_map.c		rotate.c			utils_fdf.c\
-				utils.c			key_hook.c\
+				draw_map.c		rotate.c			gradient.c\
+				utils.c			utils_fdf.c			key_hook.c\
 				free_func.c		error_free.c		error_exit.c\
 				$(GNL)get_next_line.c	$(GNL)get_next_line_utils.c
 

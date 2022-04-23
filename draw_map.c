@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 21:40:30 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 19:47:28 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/24 00:28:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,13 @@ static void	bresenham(t_point point, t_point point1, t_fdf *map)
 	steps.max = abs_max(steps.x_step, steps.y_step);
 	steps.x_step /= steps.max;
 	steps.y_step /= steps.max;
-	while ((int)(point.x - point1.x) || (int)(point.y - point1.y))
+	steps.i = 0;
+	while (steps.i < steps.max)
 	{
-		my_mlx_pixel_put(map->data, point.x, point.y, point.color);
-		point.x += steps.x_step;
-		point.y += steps.y_step;
+		my_mlx_pixel_put(map->data, point.x + steps.x_step * steps.i,
+			point.y + steps.y_step * steps.i,
+			get_gradient(point.color, point1.color, steps.max, steps.i));
+		steps.i++;
 	}
 }
 
@@ -75,11 +77,8 @@ static void	set_color_draw_line(t_fdf *map, t_color color,
 	}
 	if (color == RGB)
 	{
-		point->color = 0XCC0000;
-		if (point->z_default == 0 && point1->z_default == 0)
-			point->color = 0X0000CC;
-		if (point->z_default > 0 || point1->z_default > 0)
-			point->color = 0X00CC00;
+		set_color(point, map);
+		set_color(point1, map);
 	}
 	bresenham(set_values(*point, map), set_values(*point1, map), map);
 }
