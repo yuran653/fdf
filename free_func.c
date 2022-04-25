@@ -6,16 +6,11 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 02:39:55 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/22 20:42:35 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:45:11 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	check_leak(void)
-{
-	exit(EXIT_SUCCESS);
-}
 
 void	free_array(void **array)
 {
@@ -59,4 +54,13 @@ void	error_free_map_win_exit(t_fdf *map, int err)
 	if (!err)
 		exit(EXIT_SUCCESS);
 	error_common();
+}
+
+int	close_win_exit(t_fdf *map)
+{
+	mlx_destroy_image(map->mlx_ptr, map->data->img);
+	mlx_destroy_window(map->mlx_ptr, map->win_ptr);
+	free_map(map);
+	exit(EXIT_SUCCESS);
+	return (0);
 }

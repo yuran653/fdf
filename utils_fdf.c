@@ -6,11 +6,16 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 16:09:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 22:18:47 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:43:33 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	check_leak(void)
+{
+	exit(EXIT_SUCCESS);
+}
 
 static void	print_how_to_use_other(t_fdf *map, int *y)
 {

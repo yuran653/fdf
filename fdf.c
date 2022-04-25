@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:27 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 19:45:45 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:45:24 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ int	main(int argc, char **argv)
 			&map->data->bits_per_pixel, &map->data->line_length,
 			&map->data->endian);
 	draw_map(map);
-	mlx_hook(map->win_ptr, 2, 0L, key_hook, map);
+	mlx_hook(map->win_ptr, 17, 0L, close_win_exit, map);
+	mlx_hook(map->win_ptr, 2, 1L << 0, key_hook, map);
 	mlx_loop(map->mlx_ptr);
 	free_map(map);
 	return (0);

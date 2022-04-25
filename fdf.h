@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/24 00:26:30 by jgoldste         ###   ########.fr       */
+/*   Updated: 2022/04/25 16:44:30 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,5 +150,6 @@ void	error_map(void);
 int		error_map_return(void **array, int is_map);
 void	error_file(char *file_name, int fd);
 void	error_free_map_win_exit(t_fdf *map, int err);
+int		close_win_exit(t_fdf *map);
 
 #endif
