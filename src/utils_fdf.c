@@ -6,7 +6,7 @@
 /*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 16:09:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2023/08/07 09:26:18 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:32:26 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,14 @@ static void	print_how_to_use_other(t_fdf *map, int *y)
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To stretch / compress image:");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		// "use 'Page UP' to stretch");
 		"use 'O' to stretch");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		// "use 'Page DOWN' to compress");
 		"use 'L' to compress");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To zoom image:");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		// "use '+' to increase zoom");
 		"use '0' to increase zoom");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		// "use '-' to decrease zoom");
 		"use '9' to decrease zoom");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To change projection type:");
@@ -121,3 +117,31 @@ void	set_projection(int keycode, t_fdf *map)
 	}
 	map->angle = M_PI * map->angle_rt;
 }
+
+// static void	print_how_to_use_other(t_fdf *map, int *y)
+// {
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+// 		"To stretch / compress image:");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'Page UP' to stretch");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'Page DOWN' to compress");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+// 		"To zoom image:");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use '+' to increase zoom");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use '-' to decrease zoom");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+// 		"To change projection type:");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'P' to set PARALLEL progection");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'I' to set ISOMETRIC projection");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
+// 		"To change color:");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'C' to set RGB color");
+// 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
+// 		"use 'X' to reset color to default");
+// }
