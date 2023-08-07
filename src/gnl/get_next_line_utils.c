@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 04:42:33 by jgoldste          #+#    #+#             */
-/*   Updated: 2021/12/17 13:01:44 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:42:49 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./gnl/get_next_line.h"
 
 int	ft_strlen_gnl(char *str)
 {

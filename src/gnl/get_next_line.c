@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.21-school.ru    +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/05 01:48:39 by jgoldste          #+#    #+#             */
-/*   Updated: 2021/12/14 02:15:29 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:42:56 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./gnl/get_next_line.h"
 
 char	*get_end_line(char *line, char *buff)
 {

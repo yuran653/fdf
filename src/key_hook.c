@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 21:37:06 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/23 14:22:12 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:24:25 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	color_zoom(int keycode, t_fdf *map)
 		map->color = DEFAULT;
 	else if (keycode == COLOR_RGB)
 		map->color = RGB;
-	else if (keycode == 69 && map->zoom < 2000)
+	else if (keycode == ZOOM_PLUS && map->zoom < 2000)
 		map->zoom *= 1.029999999999999;
-	else if (keycode == 78 && map->zoom > 1.03)
+	else if (keycode == ZOOM_MINUS && map->zoom > 1.03)
 		map->zoom /= 1.029999999999999;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_fdf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/23 16:09:03 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/25 16:43:33 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 09:26:18 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,19 @@ static void	print_how_to_use_other(t_fdf *map, int *y)
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To stretch / compress image:");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		"use 'Page UP' to stretch");
+		// "use 'Page UP' to stretch");
+		"use 'O' to stretch");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		"use 'Page DOWN' to compress");
+		// "use 'Page DOWN' to compress");
+		"use 'L' to compress");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To zoom image:");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		"use '+' to increase zoom");
+		// "use '+' to increase zoom");
+		"use '0' to increase zoom");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,
-		"use '-' to decrease zoom");
+		// "use '-' to decrease zoom");
+		"use '9' to decrease zoom");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 20, *y += 40, COLOR_MAIN,
 		"To change projection type:");
 	mlx_string_put(map->mlx_ptr, map->win_ptr, 60, *y += 20, COLOR_MAIN,

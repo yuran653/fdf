@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jgoldste <jgoldste@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jgoldste <jgoldste@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 16:55:54 by jgoldste          #+#    #+#             */
-/*   Updated: 2022/04/25 16:44:30 by jgoldste         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:41:46 by jgoldste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # define _USE_MATH_DEFINES
 # define BASE16 "0123456789ABCDEF"
 
-# include "./libft/libft.h"
-# include "./ft_printf/ft_printf.h"
-# include "./get_next_line/get_next_line.h"
+# include "./gnl/get_next_line.h"
+# include "../libft/libft.h"
+# include "../minilibx_macos/mlx.h"
 # include "keys_define.h"
-# include <mlx.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
